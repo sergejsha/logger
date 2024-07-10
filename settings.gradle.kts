@@ -16,4 +16,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "logger"
-include(":library")
+include(":logger")

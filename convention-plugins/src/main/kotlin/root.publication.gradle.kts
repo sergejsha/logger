@@ -1,19 +1,36 @@
 plugins {
-    id("io.github.gradle-nexus.publish-plugin")
+    id("maven-publish")
 }
 
 allprojects {
-    group = "org.jetbrains.kotlinx.multiplatform-library-template"
-    version = "0.0.1"
+    group = "de.halfbit"
+    version = "0.1-SNAPSHOT"
 }
 
-nexusPublishing {
-    // Configure maven central repository
-    // https://github.com/gradle-nexus/publish-plugin#publishing-to-maven-central-via-sonatype-ossrh
+publishing {
     repositories {
-        sonatype {  //only for users registered in Sonatype after 24 Feb 2021
-            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        maven {
+            name = "local"
+            url = uri("${layout.buildDirectory}/repository")
+        }
+        maven {
+            name = "central"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = project.getPropertyOrEmptyString("publishing.nexus.user")
+                password = project.getPropertyOrEmptyString("publishing.nexus.password")
+            }
+        }
+        maven {
+            name = "snapshot"
+            url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+            credentials {
+                username = project.getPropertyOrEmptyString("publishing.nexus.user")
+                password = project.getPropertyOrEmptyString("publishing.nexus.password")
+            }
         }
     }
 }
+
+private fun Project.getPropertyOrEmptyString(name: String): String =
+    if (hasProperty(name)) property(name) as String? ?: "" else ""

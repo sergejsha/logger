@@ -1,51 +1,59 @@
-import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.api.tasks.bundling.Jar
-import org.gradle.kotlin.dsl.`maven-publish`
-
 plugins {
-    `maven-publish`
-    signing
+    id("maven-publish")
+    id("signing")
 }
 
 publishing {
-    // Configure all publications
     publications.withType<MavenPublication> {
-        // Stub javadoc.jar artifact
-        artifact(tasks.register("${name}JavadocJar", Jar::class) {
-            archiveClassifier.set("javadoc")
-            archiveAppendix.set(this@withType.name)
-        })
+        artifact(
+            tasks.register("${name}JavadocJar", Jar::class) {
+                archiveClassifier.set("javadoc")
+                archiveAppendix.set(name)
+            }
+        )
 
-        // Provide artifacts information required by Maven Central
         pom {
-            name.set("Kotlin Multiplatform library template")
-            description.set("Dummy library to test deployment to Maven Central")
-            url.set("https://github.com/Kotlin/multiplatform-library-template")
+            name.set(this@withType.name)
+            url.set("https://github.com/sergejsha/logger")
 
             licenses {
                 license {
-                    name.set("MIT")
-                    url.set("https://opensource.org/licenses/MIT")
+                    name.set("Custom License")
+                    url.set("https://github.com/sergejsha/logger")
                 }
             }
             developers {
                 developer {
-                    id.set("JetBrains")
-                    name.set("JetBrains Team")
-                    organization.set("JetBrains")
-                    organizationUrl.set("https://www.jetbrains.com")
+                    id.set("halfbit")
+                    name.set("Sergej Shafarenka")
+                    organization.set("Halfbit GmbH")
+                    organizationUrl.set("http://www.halfbit.de")
                 }
             }
             scm {
-                url.set("https://github.com/Kotlin/multiplatform-library-template")
+                connection.set("scm:git:git@github.com:sergejsha/${rootProject.name}.git")
+                developerConnection.set("scm:git:ssh://github.com:sergejsha/${rootProject.name}.git")
+                url.set("https://github.com/sergejsha/logger")
             }
         }
     }
 }
 
-signing {
-    if (project.hasProperty("signing.gnupg.keyName")) {
-        useGpgCmd()
+val canSign = project.hasProperty("signing.keyId")
+if (canSign) {
+    publishing {
+        publications.forEach { publication ->
+            signing.sign(publication)
+        }
+    }
+    signing {
         sign(publishing.publications)
     }
 }
+
+// fix for: https://github.com/gradle/gradle/issues/26091
+//          https://youtrack.jetbrains.com/issue/KT-46466 is fixed
+tasks.withType<AbstractPublishToMaven>().configureEach {
+    dependsOn(project.tasks.withType(Sign::class.java))
+}
+
