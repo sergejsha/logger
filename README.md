@@ -79,15 +79,13 @@ kotlin {
 ```
 Copyright 2024 Sergej Shafarenka, www.halfbit.de
 
-You are free to use, copy, redistribute, remix, transform, and 
-build upon the material for NON-COMMERCIAL purposes only.
+You are free to use, copy, redistribute, remix, transform, and build 
+upon the material for any purposes EXCEPT for directly or indirectly
+related to any MILITARY use. 
 
 Any distributed derivative work containing this material or parts 
 of it must have this copyright attribution notices.
 
 The material is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES 
 OR CONDITIONS OF ANY KIND, either express or implied.
-
-Contact the developer if you want to use the material under a 
-different license or use it for COMMERCIAL purposes.
 ```
