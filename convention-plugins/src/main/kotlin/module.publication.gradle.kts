@@ -5,6 +5,30 @@ plugins {
 
 publishing {
     publications.withType<MavenPublication> {
+
+        repositories {
+            maven {
+                name = "local"
+                url = uri("${layout.buildDirectory}/repository")
+            }
+            maven {
+                name = "central"
+                url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+                credentials {
+                    username = project.getPropertyOrEmptyString("publishing.nexus.user")
+                    password = project.getPropertyOrEmptyString("publishing.nexus.password")
+                }
+            }
+            maven {
+                name = "snapshot"
+                url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+                credentials {
+                    username = project.getPropertyOrEmptyString("publishing.nexus.user")
+                    password = project.getPropertyOrEmptyString("publishing.nexus.password")
+                }
+            }
+        }
+
         artifact(
             tasks.register("${name}JavadocJar", Jar::class) {
                 archiveClassifier.set("javadoc")
@@ -38,6 +62,9 @@ publishing {
         }
     }
 }
+
+private fun Project.getPropertyOrEmptyString(name: String): String =
+    if (hasProperty(name)) property(name) as String? ?: "" else ""
 
 val canSign = project.hasProperty("signing.keyId")
 if (canSign) {

@@ -37,17 +37,6 @@ public data class LoggerBuilder(
 ) {
     private var defaultSinksRemoved = false
 
-    public inline fun <reified S : LogSink> addUniqueSink(sink: S) {
-        maybeRemoveDefaultSinks()
-        val alreadyRegisteredSink = sinks.find { it is S }
-        check(alreadyRegisteredSink == null) {
-            "A sink of given type is already registered:\n" +
-                    "   Already registered sink: ${alreadyRegisteredSink}\n"
-            "   Sink to register: $sink"
-        }
-        sinks += sink
-    }
-
     public inline fun <reified S : LogSink> replaceSink(sink: S) {
         maybeRemoveDefaultSinks()
         sinks = sinks.filter { it !is S } + sink

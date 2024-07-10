@@ -9,7 +9,8 @@ Minimalistic Logger for Kotlin Multiplatform
 ```kotlin
 
 // Initialize
-class App : GamineApp, Application() {
+class App : Application() {
+
     override fun onCreate() {
         initializeLogger {
             registerAndroidLogSink()
@@ -24,10 +25,10 @@ init {
     d(TAG) { "created: size=${bytes?.size}" } // debug
 
     try {
-        httpClient.post("ReadData")
+        httpClient.post("read-data")
     } catch (e: Exception) {
-        w(TAG, e) { "ReadData failed" } // warning
-        e(TAG, e) { "ReadData failed" } // error
+        w(TAG, e) { "read-data failed" } // warning
+        e(TAG, e) { "read-data failed" } // error
     }
 }
 
@@ -43,7 +44,7 @@ kotlin = "2.0.0"
 logger = "0.1"
 
 [libraries]
-csv = { module = "de.halfbit:logger", version.ref = "logger" }
+logger = { module = "de.halfbit:logger", version.ref = "logger" }
 
 [plugins]
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
@@ -67,7 +68,7 @@ kotlin {
 
 # Release
 
-1. Bump version in `build.gradle.kts` of the root project
+1. Bump version in `root.publication.gradle.kts` of the root project
 2. `./gradlew clean build publishAllPublicationsToCentralRepository`
 
 # Release Notes
