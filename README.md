@@ -79,9 +79,8 @@ kotlin {
 ```
 Copyright 2024 Sergej Shafarenka, www.halfbit.de
 
-You are free to use, copy, redistribute, remix, transform, and build 
-upon the material for any purposes EXCEPT for directly or indirectly
-related to any MILITARY USE. 
+You are FREE to use, copy, redistribute, remix, transform, and build 
+upon the material or its derivative FOR ANY LEGAL PURPOSES.
 
 Any distributed derivative work containing this material or parts 
 of it must have this copyright attribution notices.
