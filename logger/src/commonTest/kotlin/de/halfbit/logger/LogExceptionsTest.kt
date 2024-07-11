@@ -30,8 +30,14 @@ class LogExceptionsTest {
         val stackTrace = memoryRingSink.getLogEntries().first().lines()
         assertTrue(stackTrace.size > 3)
 
-        val actual = stackTrace.first()
-        val expected = "23:40:57.120      LogExceptionsTest E Error message"
-        assertEquals(expected, actual)
+        val actualMessage = stackTrace[0]
+        val expectedMessage = "23:40:57.120      LogExceptionsTest E Error message"
+        assertEquals(expectedMessage, actualMessage)
+
+        val actualException = stackTrace[1]
+        assertTrue("Cannot find exception in: $actualException") {
+            actualException.contains("java.lang.Exception") || // jvm
+                    actualException.contains("kotlin.Exception") // ios
+        }
     }
 }
