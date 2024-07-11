@@ -49,7 +49,7 @@ In `gradle/libs.versions.toml`
 ```toml
 [versions]
 kotlin = "2.0.0"
-logger = "0.2"
+logger = "0.3"
 
 [libraries]
 logger = { module = "de.halfbit:logger", version.ref = "logger" }
@@ -81,6 +81,7 @@ kotlin {
 
 # Release Notes
 
+- 0.3 MemoryRingSync prints log entries lazily.
 - 0.2 Improve log layouts for Println and MemoryRing sinks.
 - 0.1 Initial release
 

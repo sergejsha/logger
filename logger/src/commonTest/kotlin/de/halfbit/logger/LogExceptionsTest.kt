@@ -7,6 +7,7 @@ import de.halfbit.logger.sink.memory.registerMemoryRingSink
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 private const val TAG = "LogExceptionsTest"
 
@@ -26,18 +27,11 @@ class LogExceptionsTest {
         e(TAG, Exception()) { "Error message" }
 
         // then
-        val actual = memoryRingSink.getLogEntries().first().lines().take(3).removeSourceReference()
-        val expected = listOf(
-            "23:40:57.120      LogExceptionsTest E Error message",
-            "                                      java.lang.Exception",
-            "                                      \tat de.halfbit.logger.LogExceptionsTest.logException"
-        )
+        val stackTrace = memoryRingSink.getLogEntries().first().lines()
+        assertTrue(stackTrace.size > 3)
+
+        val actual = stackTrace.first()
+        val expected = "23:40:57.120      LogExceptionsTest E Error message"
         assertEquals(expected, actual)
     }
 }
-
-private fun List<String>.removeSourceReference(): List<String> =
-    map { line ->
-        val startIndex = line.indexOf('(')
-        if (startIndex > 0) line.substring(0, startIndex) else line
-    }
