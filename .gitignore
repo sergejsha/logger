@@ -1,0 +1,35 @@
+# OS X files
+.DS_Store
+
+# Ignore IntelliJ-based project files
+*.iml
+.idea/*
+
+# This ensures everyone will use the same code formatter within the IDE
+!.idea/codeStyles/
+!.idea/codeStyleSettings.xml
+!.idea/fileTemplates/
+
+# Android Studio files
+local.properties
+.gradle
+build/
+!*/src/**/build/
+!*/scripts/**/build/
+!appAndroid/scripts/
+
+# gradle-profiler files
+gradle-user-home
+profile-out*
+
+# Misc
+certs/
+node_modules/
+release-keys/
+*.exec
+/graph
+
+# Xcode
+xcuserdata/
+
+.kotlin/
