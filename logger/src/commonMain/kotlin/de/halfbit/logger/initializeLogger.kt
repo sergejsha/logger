@@ -21,7 +21,7 @@ public fun initializeLogger(
             sinks = logger.sinks,
             logLevel = logger.logLevel,
             getClockNow = Clock.System::now,
-            removeDefaultSinks = !logger.initialized
+            removeDefaultSinks = !logger.initialized,
         )
 
         block(builder)
@@ -50,6 +50,10 @@ public data class LoggerBuilder(
     public inline fun <reified S : LogSink> addSink(sink: S) {
         maybeRemoveDefaultSinks()
         sinks += sink
+    }
+
+    public fun removeAllSinks() {
+        sinks = emptyList()
     }
 
     @PublishedApi
