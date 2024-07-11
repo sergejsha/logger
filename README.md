@@ -4,6 +4,8 @@
 
 Minimalistic Logger for Kotlin Multiplatform
 
+![Architecture diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sergejsha/logger/master/documentation/architecture.iuml)
+
 # Usage
 
 ```kotlin
@@ -12,15 +14,17 @@ class App : Application() {
     override fun onCreate() {
         initializeLogger {
             registerAndroidLogSink()
+            registerPrintlnSink()
+            registerMemoryRingSink()
             logLevel = if (isDebugBuild) LogLevel.Debug else LogLevel.Info
         }
     }
 }
 
-// Create a TAG constant
+// Use logger
+
 private const val TAG = "Reader"
 
-// Use logger
 class Reader {
     init {
         i(TAG) { "created: size=${bytes?.size}" } // info
