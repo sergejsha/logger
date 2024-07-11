@@ -13,7 +13,7 @@ internal var logger: Logger = Logger()
 @PublishedApi
 internal data class Logger(
     val sinks: List<LogSink> = listOf(PrintlnSink(logPrinter = LogPrinter.Short)),
-    val logLevel: LogLevel = LogLevel.Debug,
+    val loggableLevel: LoggableLevel = LoggableLevel.Everything,
     val getClockNow: () -> Instant = Clock.System::now,
     val initialized: Boolean = false,
 )

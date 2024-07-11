@@ -19,7 +19,7 @@ public fun initializeLogger(
     synchronized(lock) {
         val builder = LoggerBuilder(
             sinks = logger.sinks,
-            loggableLevel = logger.logLevel,
+            loggableLevel = logger.loggableLevel,
             getClockNow = Clock.System::now,
             removeDefaultSinks = !logger.initialized,
         )
@@ -28,7 +28,7 @@ public fun initializeLogger(
 
         logger = Logger(
             sinks = builder.sinks,
-            logLevel = builder.loggableLevel,
+            loggableLevel = builder.loggableLevel,
             getClockNow = builder.getClockNow,
         )
     }
@@ -36,7 +36,7 @@ public fun initializeLogger(
 
 public data class LoggerBuilder(
     var sinks: List<LogSink>,
-    var loggableLevel: LogLevel,
+    var loggableLevel: LoggableLevel,
     internal var getClockNow: () -> Instant,
     private val removeDefaultSinks: Boolean,
 ) {
