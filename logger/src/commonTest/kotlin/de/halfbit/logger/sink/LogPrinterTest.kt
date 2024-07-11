@@ -19,7 +19,7 @@ class LogPrinterTest {
     fun shortLogPrinterNoTime() {
         // given
         initializeLogger {
-            memoryRingSink = registerMemoryRingSink(logPrinter = LogPrinter.ShortNoTime)
+            memoryRingSink = registerMemoryRingSink(LogPrinter.ShortNoTime)
         }
 
         // when
@@ -45,7 +45,7 @@ class LogPrinterTest {
     fun shortLogPrinter() {
         // given
         initializeLogger {
-            memoryRingSink = registerMemoryRingSink(logPrinter = LogPrinter.Short)
+            memoryRingSink = registerMemoryRingSink(LogPrinter.Short)
             getClockNow = { Instant.parse("2024-06-18T23:40:57.120Z") }
         }
 

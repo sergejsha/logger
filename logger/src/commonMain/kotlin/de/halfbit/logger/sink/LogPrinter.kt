@@ -47,7 +47,7 @@ private class PrettyLogPrinter(
         buildString {
             if (layout.timestamp == Timestamp.Time) {
                 val iso8601String = timestamp.toString() // 2023-01-02T23:40:57.120Z
-                val timeString = if (iso8601String.length == 24) iso8601String.substring(11, 23) else iso8601String
+                val timeString = if (iso8601String.length >= 24) iso8601String.substring(11, 23) else iso8601String
                 append(timeString)
                 append(' ')
             }
@@ -59,10 +59,26 @@ private class PrettyLogPrinter(
                 append(message)
             }
             if (err != null) {
-                append(", exception: \n")
-                append(err.stackTraceToString())
+                val timeLength = if (layout.timestamp == Timestamp.Time) 12 else 0
+                val logLevelLength = 1
+                val separatorLength = 1
+                val indent = timeLength + separatorLength + layout.tagMaxLength +
+                        separatorLength + logLevelLength + separatorLength
+                append('\n')
+                appendException(err, indent)
             }
         }
+}
+
+private fun StringBuilder.appendException(err: Throwable, indent: Int) {
+    val stack = err.stackTraceToString().lines()
+    stack.forEachIndexed { index, line ->
+        append(" ".repeat(indent))
+        append(line)
+        if (index != stack.lastIndex) {
+            append('\n')
+        }
+    }
 }
 
 private const val DOTS = ".."
