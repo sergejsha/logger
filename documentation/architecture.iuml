@@ -32,5 +32,5 @@ LogSink <|.. PrintlnSink
 LogSink <|.. MemoryRingSink
 LogSink <|.. AndroidLogSink
 
-Log "1" --> "N" LogSink
+Log "1" -[dotted]- "N" LogSink : >
 @enduml
