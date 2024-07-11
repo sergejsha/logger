@@ -2,47 +2,46 @@
 package de.halfbit.logger
 
 import de.halfbit.logger.LogLevel.*
-import kotlinx.datetime.Clock
 
 public inline fun d(tag: String, getMessage: () -> String) {
-    if (logger.level <= Debug) {
+    if (logger.logLevel <= Debug) {
         log(Debug, tag, getMessage(), null)
     }
 }
 
 public inline fun i(tag: String, getMessage: () -> String) {
-    if (logger.level <= Info) {
+    if (logger.logLevel <= Info) {
         log(Info, tag, getMessage(), null)
     }
 }
 
 public inline fun w(tag: String, getMessage: () -> String) {
-    if (logger.level <= Warning) {
+    if (logger.logLevel <= Warning) {
         log(Warning, tag, getMessage(), null)
     }
 }
 
 public inline fun w(tag: String, err: Throwable, getMessage: () -> String) {
-    if (logger.level <= Warning) {
+    if (logger.logLevel <= Warning) {
         log(Warning, tag, getMessage(), err)
     }
 }
 
 public inline fun e(tag: String, err: Throwable, getMessage: () -> String) {
-    if (logger.level <= Error) {
+    if (logger.logLevel <= Error) {
         log(Error, tag, getMessage(), err)
     }
 }
 
 public fun e(tag: String, err: Throwable) {
-    if (logger.level <= Error) {
+    if (logger.logLevel <= Error) {
         log(Error, tag, null, err)
     }
 }
 
 @PublishedApi
 internal fun log(level: LogLevel, tag: String, message: String?, err: Throwable?) {
-    val timestamp = Clock.System.now()
+    val timestamp = logger.getClockNow()
     logger.sinks.forEach { sink ->
         sink.log(level, tag, timestamp, message, err)
     }

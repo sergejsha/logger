@@ -1,9 +1,7 @@
 /** Copyright 2024 Halfbit GmbH, Sergej Shafarenka */
-package de.halfbit.logger.sink
+package de.halfbit.logger
 
-import de.halfbit.logger.LogLevel
-import de.halfbit.logger.d
-import de.halfbit.logger.initializeLogger
+import de.halfbit.logger.sink.LogSink
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertTrue

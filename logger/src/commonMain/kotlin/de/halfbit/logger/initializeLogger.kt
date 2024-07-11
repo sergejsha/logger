@@ -4,6 +4,8 @@ package de.halfbit.logger
 import de.halfbit.logger.sink.LogSink
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
+import kotlinx.datetime.Clock
+import kotlinx.datetime.Instant
 
 @DslMarker
 public annotation class LoggerDsl
@@ -17,7 +19,8 @@ public fun initializeLogger(
     synchronized(lock) {
         val builder = LoggerBuilder(
             sinks = logger.sinks,
-            logLevel = logger.level,
+            logLevel = logger.logLevel,
+            getClockNow = Clock.System::now,
             removeDefaultSinks = !logger.initialized
         )
 
@@ -25,7 +28,8 @@ public fun initializeLogger(
 
         logger = Logger(
             sinks = builder.sinks,
-            level = builder.logLevel,
+            logLevel = builder.logLevel,
+            getClockNow = builder.getClockNow,
         )
     }
 }
@@ -33,6 +37,7 @@ public fun initializeLogger(
 public data class LoggerBuilder(
     var sinks: List<LogSink>,
     var logLevel: LogLevel,
+    internal var getClockNow: () -> Instant,
     private val removeDefaultSinks: Boolean,
 ) {
     private var defaultSinksRemoved = false

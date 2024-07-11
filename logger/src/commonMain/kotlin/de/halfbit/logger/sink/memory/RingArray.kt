@@ -22,12 +22,9 @@ internal class RingArray<T>(bufferSize: Int) : Iterable<T> {
 
     operator fun get(index: Int): T =
         when {
-            size == 0 || index < 0 || index >= size ->
-                throw IndexOutOfBoundsException("$index, size: $size")
-            size == data.size ->
-                checkNotNull(data[(head + index) % data.size])
-            else ->
-                checkNotNull(data[index])
+            size == 0 || index < 0 || index >= size -> throw IndexOutOfBoundsException("$index, size: $size")
+            size == data.size -> checkNotNull(data[(head + index) % data.size])
+            else -> checkNotNull(data[index])
         }
 
     fun toList(): List<T> =
