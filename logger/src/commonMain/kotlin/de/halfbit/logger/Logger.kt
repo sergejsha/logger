@@ -8,12 +8,20 @@ import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 
 @PublishedApi
-internal var logger: Logger = Logger()
+internal var currentLogger: Logger = createInitialLogger()
 
 @PublishedApi
 internal data class Logger(
-    val sinks: List<LogSink> = listOf(PrintlnSink(logPrinter = LogPrinter.Short)),
-    val loggableLevel: LoggableLevel = LoggableLevel.Everything,
-    val getClockNow: () -> Instant = Clock.System::now,
-    val initialized: Boolean = false,
+    val sinks: List<LogSink>,
+    val loggableLevel: LoggableLevel,
+    val getClockNow: () -> Instant,
+    val initialized: Boolean,
 )
+
+internal fun createInitialLogger(): Logger =
+    Logger(
+        sinks = listOf(PrintlnSink(LogPrinter.Short)),
+        loggableLevel = LoggableLevel.Everything,
+        getClockNow = Clock.System::now,
+        initialized = false,
+    )
