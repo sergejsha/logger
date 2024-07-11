@@ -49,7 +49,7 @@ private fun StringBuilder.appendTag(tag: String, maxLength: Int) {
     val comp = if (tag.length % 2 == 0) 0 else 1
     val leftIndex = tag.length / 2 - DOTS.length + comp
     val leftString = tag.substring(0, leftIndex)
-    val rightLength = maxLength - (leftIndex + DOTS.length)
+    val rightLength = maxLength - leftIndex - DOTS.length
     val rightString = tag.substring(tag.length - rightLength)
 
     append(leftString)

@@ -1,3 +1,4 @@
+/** Copyright 2024 Halfbit GmbH, Sergej Shafarenka */
 package de.halfbit.logger
 
 import de.halfbit.logger.sink.LogPrinter
