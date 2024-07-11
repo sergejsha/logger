@@ -1,0 +1,30 @@
+@startuml
+hide empty members
+hide stereotype
+hide circle
+
+class "d(TAG) { "Debug" }" as Debug
+class "i(TAG) { "Info" }" as Info
+class "w(TAG) { "Warning" }" as Warn
+class "e(TAG, exception) { "Error" }" as Error
+class "log(TAG, LogLevel, ...)" as Log
+
+Debug -- Log : >
+Info -- Log : >
+Warn -- Log : >
+Error -- Log : >
+
+interface LogSink {
+    {abstract} log(TAG, LogLevel, ...)
+}
+
+class PrintlnSink
+class AndroidLogSink
+class MemoryRingSink
+
+LogSink <|.. PrintlnSink
+LogSink <|.. AndroidLogSink
+LogSink <|.. MemoryRingSink
+
+Log "1" --> "N" LogSink
+@enduml
