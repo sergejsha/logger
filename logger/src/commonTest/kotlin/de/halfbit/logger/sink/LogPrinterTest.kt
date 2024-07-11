@@ -1,9 +1,12 @@
 /** Copyright 2024 Halfbit GmbH, Sergej Shafarenka */
-package de.halfbit.logger
+package de.halfbit.logger.sink
 
-import de.halfbit.logger.sink.LogPrinter
+import de.halfbit.logger.d
+import de.halfbit.logger.i
+import de.halfbit.logger.initializeLogger
 import de.halfbit.logger.sink.memory.MemoryRingSink
 import de.halfbit.logger.sink.memory.registerMemoryRingSink
+import de.halfbit.logger.w
 import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
