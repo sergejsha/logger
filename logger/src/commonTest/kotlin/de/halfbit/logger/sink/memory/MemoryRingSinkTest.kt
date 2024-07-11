@@ -31,8 +31,15 @@ class MemoryRingSinkTest {
         d(TAG) { "message 5" }
 
         // then
-        val entries = memoryRingSink.getLogEntries()
-        assertContentEquals(entries, listOf("D message 1", "D message 2", "D message 3", "D message 4", "D message 5"))
+        val actual = memoryRingSink.getLogEntries()
+        val expected = listOf(
+            "D message 1",
+            "D message 2",
+            "D message 3",
+            "D message 4",
+            "D message 5",
+        )
+        assertContentEquals(expected, actual)
     }
 
     @Test
@@ -54,7 +61,12 @@ class MemoryRingSinkTest {
         d(TAG) { "message 5" }
 
         // then
-        val entries = memoryRingSink.getLogEntries()
-        assertContentEquals(entries, listOf("D message 3", "D message 4", "D message 5"))
+        val actual = memoryRingSink.getLogEntries()
+        val expected = listOf(
+            "D message 3",
+            "D message 4",
+            "D message 5",
+        )
+        assertContentEquals(expected, actual)
     }
 }

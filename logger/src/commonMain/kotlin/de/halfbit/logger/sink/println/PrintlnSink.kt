@@ -8,7 +8,7 @@ import de.halfbit.logger.sink.LogSink
 import kotlinx.datetime.Instant
 
 public fun LoggerBuilder.registerPrintlnSink(
-    logPrinter: LogPrinter = LogPrinter.Short,
+    logPrinter: LogPrinter = LogPrinter.ShortNoTime,
 ) {
     replaceSink(PrintlnSink(logPrinter))
 }
@@ -17,6 +17,6 @@ internal class PrintlnSink(
     private val logPrinter: LogPrinter,
 ) : LogSink {
     override fun log(level: LogLevel, tag: String, timestamp: Instant, message: String?, err: Throwable?) {
-        print(logPrinter(level, tag, timestamp, message, err))
+        println(logPrinter(level, tag, timestamp, message, err))
     }
 }

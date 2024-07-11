@@ -13,6 +13,32 @@ class LogPrinterTest {
     private lateinit var memoryRingSink: MemoryRingSink
 
     @Test
+    fun shortLogPrinterNoTime() {
+        // given
+        initializeLogger {
+            memoryRingSink = registerMemoryRingSink(logPrinter = LogPrinter.ShortNoTime)
+        }
+
+        // when
+        d("Reader") { "Reading data" }
+        i("Messenger") { "Sending message" }
+        w("ReadableChannel") { "Sending message" }
+        d("DefaultReadableRemoteChannel") { "Reading more data" }
+        d("SimpleReadableRemoteChannel") { "Reading even more data" }
+
+        // then
+        val actual = memoryRingSink.getLogEntries()
+        val expected = listOf(
+            "                Reader D Reading data",
+            "             Messenger I Sending message",
+            "       ReadableChannel W Sending message",
+            "DefaultRea..oteChannel D Reading more data",
+            "SimpleRead..oteChannel D Reading even more data",
+        )
+        assertContentEquals(expected, actual)
+    }
+
+    @Test
     fun shortLogPrinter() {
         // given
         initializeLogger {
@@ -24,17 +50,17 @@ class LogPrinterTest {
         d("Reader") { "Reading data" }
         i("Messenger") { "Sending message" }
         w("ReadableChannel") { "Sending message" }
-        d("DefaultReadableChannel") { "Reading more data" }
-        d("SimpleReadableChannel") { "Reading more data" }
+        d("DefaultReadableRemoteChannel") { "Reading more data" }
+        d("SimpleReadableRemoteChannel") { "Reading even more data" }
 
         // then
         val actual = memoryRingSink.getLogEntries()
         val expected = listOf(
-            "23:40:57.120 D               Reader | Reading data",
-            "23:40:57.120 I            Messenger | Sending message",
-            "23:40:57.120 W      ReadableChannel | Sending message",
-            "23:40:57.120 D DefaultRe..leChannel | Reading more data",
-            "23:40:57.120 D SimpleRea..leChannel | Reading more data",
+            "23:40:57.120                 Reader D Reading data",
+            "23:40:57.120              Messenger I Sending message",
+            "23:40:57.120        ReadableChannel W Sending message",
+            "23:40:57.120 DefaultRea..oteChannel D Reading more data",
+            "23:40:57.120 SimpleRead..oteChannel D Reading even more data",
         )
         assertContentEquals(expected, actual)
     }
