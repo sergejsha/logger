@@ -12,11 +12,11 @@ class LoggableLevelTest {
     private lateinit var memoryRingSink: MemoryRingSink
 
     @Test
-    fun debugLevelLogsDebugInfoWarnAndError() {
+    fun everythingLevelLogsDebugInfoWarnAndError() {
 
         // given
         initializeLogger {
-            loggableLevel = LogLevel.Debug
+            loggableLevel = LoggableLevel.Everything
             memoryRingSink = registerMemoryRingSink(
                 logPrinter = { level, _, _, message, _ -> "${level.short} $message" }
             )
@@ -44,7 +44,7 @@ class LoggableLevelTest {
 
         // given
         initializeLogger {
-            loggableLevel = LogLevel.Info
+            loggableLevel = LoggableLevel.InfoAndSevere
             memoryRingSink = registerMemoryRingSink(
                 logPrinter = { level, _, _, message, _ -> "${level.short} $message" }
             )
@@ -71,7 +71,7 @@ class LoggableLevelTest {
 
         // given
         initializeLogger {
-            loggableLevel = LogLevel.Warning
+            loggableLevel = LoggableLevel.WarningsAndSevere
             memoryRingSink = registerMemoryRingSink(
                 logPrinter = { level, _, _, message, _ -> "${level.short} $message" }
             )
@@ -97,7 +97,7 @@ class LoggableLevelTest {
 
         // given
         initializeLogger {
-            loggableLevel = LogLevel.Error
+            loggableLevel = LoggableLevel.ErrorsOnly
             memoryRingSink = registerMemoryRingSink(
                 logPrinter = { level, _, _, message, _ -> "${level.short} $message" }
             )
@@ -114,6 +114,29 @@ class LoggableLevelTest {
         val expected = listOf(
             "E message 4",
         )
+        assertContentEquals(expected, actual)
+    }
+
+    @Test
+    fun nothingLevelLogsNothing() {
+
+        // given
+        initializeLogger {
+            loggableLevel = LoggableLevel.Nothing
+            memoryRingSink = registerMemoryRingSink(
+                logPrinter = { level, _, _, message, _ -> "${level.short} $message" }
+            )
+        }
+
+        // when
+        d(TAG) { "message 1" }
+        i(TAG) { "message 2" }
+        w(TAG) { "message 3" }
+        e(TAG, Exception()) { "message 4" }
+
+        // then
+        val actual = memoryRingSink.getLogEntries()
+        val expected = emptyList<String>()
         assertContentEquals(expected, actual)
     }
 }
