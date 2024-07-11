@@ -1,4 +1,5 @@
 @startuml
+skinparam packageStyle rectangle
 hide empty members
 hide stereotype
 hide circle
@@ -9,22 +10,27 @@ class "w(TAG) { "Warning" }" as Warn
 class "e(TAG, exception) { "Error" }" as Error
 class "log(TAG, LogLevel, ...)" as Log
 
-Debug -- Log : >
-Info -- Log : >
-Warn -- Log : >
-Error -- Log : >
+Debug -[dotted]- Log : >
+Info -[dotted]- Log : >
+Warn -[dotted]- Log : >
+Error -[dotted]- Log : >
 
 interface LogSink {
     {abstract} log(TAG, LogLevel, ...)
 }
 
-class PrintlnSink
-class AndroidLogSink
-class MemoryRingSink
+package android {
+    class AndroidLogSink
+}
+
+package common {
+    class PrintlnSink
+    class MemoryRingSink
+}
 
 LogSink <|.. PrintlnSink
-LogSink <|.. AndroidLogSink
 LogSink <|.. MemoryRingSink
+LogSink <|.. AndroidLogSink
 
 Log "1" --> "N" LogSink
 @enduml
