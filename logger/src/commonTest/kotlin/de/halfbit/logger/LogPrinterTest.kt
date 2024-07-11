@@ -24,14 +24,16 @@ class LogPrinterTest {
         i("Messenger") { "Sending message" }
         w("ReadableChannel") { "Sending message" }
         d("DefaultReadableChannel") { "Reading more data" }
+        d("SimpleReadableChannel") { "Reading more data" }
 
         // then
         val actual = memoryRingSink.getLogEntries()
         val expected = listOf(
-            "23:40:57.120 D           Reader | Reading data",
-            "23:40:57.120 I        Messenger | Sending message",
-            "23:40:57.120 W  ReadableChannel | Sending message",
-            "23:40:57.120 D tReadableChannel | Reading more data",
+            "23:40:57.120 D               Reader | Reading data",
+            "23:40:57.120 I            Messenger | Sending message",
+            "23:40:57.120 W      ReadableChannel | Sending message",
+            "23:40:57.120 D DefaultRe..leChannel | Reading more data",
+            "23:40:57.120 D SimpleRea..leChannel | Reading more data",
         )
         assertContentEquals(expected, actual)
     }

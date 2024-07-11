@@ -22,7 +22,7 @@ public fun interface LogPrinter {
                 append(' ')
                 append(level.short)
                 append(' ')
-                append(tag.padStart(16, padChar = ' ').takeLast(16))
+                appendTag(tag, 20)
                 append(" | ")
                 if (message != null) {
                     append(message)
@@ -34,4 +34,25 @@ public fun interface LogPrinter {
             }
         }
     }
+}
+
+private const val DOTS = ".."
+
+private fun StringBuilder.appendTag(tag: String, maxLength: Int) {
+    // see LogPrinterTest.shortLogPrinter()
+
+    if (tag.length <= maxLength) {
+        append(tag.padStart(maxLength, ' '))
+        return
+    }
+
+    val comp = if (tag.length % 2 == 0) 0 else 1
+    val leftIndex = tag.length / 2 - DOTS.length + comp
+    val leftString = tag.substring(0, leftIndex)
+    val rightLength = maxLength - (leftIndex + DOTS.length)
+    val rightString = tag.substring(tag.length - rightLength)
+
+    append(leftString)
+    append(DOTS)
+    append(rightString)
 }
