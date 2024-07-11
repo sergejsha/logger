@@ -4,37 +4,37 @@ package de.halfbit.logger
 import de.halfbit.logger.LogLevel.*
 
 public inline fun d(tag: String, getMessage: () -> String) {
-    if (logger.logLevel <= Debug) {
+    if (logger.loggableLevel.weight <= Debug.weight) {
         log(Debug, tag, getMessage(), null)
     }
 }
 
 public inline fun i(tag: String, getMessage: () -> String) {
-    if (logger.logLevel <= Info) {
+    if (logger.loggableLevel.weight <= Info.weight) {
         log(Info, tag, getMessage(), null)
     }
 }
 
 public inline fun w(tag: String, getMessage: () -> String) {
-    if (logger.logLevel <= Warning) {
+    if (logger.loggableLevel.weight <= Warning.weight) {
         log(Warning, tag, getMessage(), null)
     }
 }
 
 public inline fun w(tag: String, err: Throwable, getMessage: () -> String) {
-    if (logger.logLevel <= Warning) {
+    if (logger.loggableLevel.weight <= Warning.weight) {
         log(Warning, tag, getMessage(), err)
     }
 }
 
 public inline fun e(tag: String, err: Throwable, getMessage: () -> String) {
-    if (logger.logLevel <= Error) {
+    if (logger.loggableLevel.weight <= Error.weight) {
         log(Error, tag, getMessage(), err)
     }
 }
 
 public fun e(tag: String, err: Throwable) {
-    if (logger.logLevel <= Error) {
+    if (logger.loggableLevel.weight <= Error.weight) {
         log(Error, tag, null, err)
     }
 }
