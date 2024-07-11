@@ -1,8 +1,9 @@
 [![Maven Central](http://img.shields.io/maven-central/v/de.halfbit/logger.svg)](https://central.sonatype.com/artifact/de.halfbit/logger)
 
-# Logger
+# 🪵 Logger
 
-Minimalistic Logger for Kotlin Multiplatform
+Minimalistic Logger for Kotlin Multiplatform from one of my projects,
+shared with the awesome Kotlin community.
 
 ![Architecture diagram](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/sergejsha/logger/master/documentation/architecture.iuml)
 
