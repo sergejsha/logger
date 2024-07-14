@@ -18,7 +18,7 @@ class App : Application() {
             registerAndroidLogSink()
             registerPrintlnSink() // default, if no sinks are configured
             registerMemoryRingSink()
-            loggableLevel = if (isDebugBuild) Everyting else InfoAndSevere
+            loggableLevel = if (isDebugBuild) Everything else InfoAndSevere
         }
     }
 }
