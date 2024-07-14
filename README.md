@@ -82,7 +82,7 @@ kotlin {
 
 # Release Notes
 
-- 0.3 MemoryRingSync prints log entries lazily.
+- 0.3 MemoryRingSink prints log entries lazily.
 - 0.2 Improve log layouts for Println and MemoryRing sinks.
 - 0.1 Initial release
 
