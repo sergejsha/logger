@@ -15,7 +15,6 @@ private val lock = SynchronizedObject()
  * Initializes a new logger instance. Call this method when the app is created,
  * but before the logger is used.
  */
-@LoggerDsl
 public fun initializeLogger(block: LoggerBuilder.() -> Unit) {
     initializeCurrentLogger(createInitialLogger(), block)
 }
@@ -24,7 +23,6 @@ public fun initializeLogger(block: LoggerBuilder.() -> Unit) {
  * Updates the current logger instance. Call this method when the app needs to
  * register more sinks outside the app's initialization method.
  */
-@LoggerDsl
 public fun updateLogger(block: LoggerBuilder.() -> Unit) {
     initializeCurrentLogger(currentLogger, block)
 }
@@ -50,6 +48,7 @@ private fun initializeCurrentLogger(
     }
 }
 
+@LoggerDsl
 public data class LoggerBuilder(
     var sinks: List<LogSink>,
     var loggableLevel: LoggableLevel,
