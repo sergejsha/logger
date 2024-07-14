@@ -1,4 +1,5 @@
 [![Maven Central](http://img.shields.io/maven-central/v/de.halfbit/logger.svg)](https://central.sonatype.com/artifact/de.halfbit/logger)
+![maintenance-status](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
 
 # 🪵 Logger
 
@@ -17,7 +18,7 @@ class App : Application() {
             registerAndroidLogSink()
             registerPrintlnSink() // default, if no sinks are configured
             registerMemoryRingSink()
-            loggableLevel = if (isDebugBuild) Everyting else InfoAndSevere
+            loggableLevel = if (isDebugBuild) Everything else InfoAndSevere
         }
     }
 }
@@ -81,7 +82,7 @@ kotlin {
 
 # Release Notes
 
-- 0.3 MemoryRingSync prints log entries lazily.
+- 0.3 MemoryRingSink prints log entries lazily.
 - 0.2 Improve log layouts for Println and MemoryRing sinks.
 - 0.1 Initial release
 
