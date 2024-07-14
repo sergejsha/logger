@@ -49,7 +49,8 @@ private fun initializeCurrentLogger(
 }
 
 @LoggerDsl
-public data class LoggerBuilder(
+public data class LoggerBuilder
+internal constructor(
     var sinks: List<LogSink>,
     var loggableLevel: LoggableLevel,
     internal var getClockNow: () -> Instant,
