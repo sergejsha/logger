@@ -42,8 +42,8 @@ publishing {
 
             licenses {
                 license {
-                    name.set("Custom License")
-                    url.set("https://github.com/sergejsha/logger")
+                    name.set("The Apache License, Version 2.0")
+                    url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
                 }
             }
             developers {
