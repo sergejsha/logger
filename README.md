@@ -50,7 +50,7 @@ In `gradle/libs.versions.toml`
 ```toml
 [versions]
 kotlin = "2.0.0"
-logger = "0.3"
+logger = "0.4"
 
 [libraries]
 logger = { module = "de.halfbit:logger", version.ref = "logger" }
@@ -82,6 +82,7 @@ kotlin {
 
 # Release Notes
 
+- 0.4 Migrate to the Apache 2.0 license.
 - 0.3 MemoryRingSink prints log entries lazily.
 - 0.2 Improve log layouts for Println and MemoryRing sinks.
 - 0.1 Initial release

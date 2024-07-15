@@ -36,8 +36,9 @@ class LogExceptionsTest {
 
         val actualException = stackTrace[1]
         assertTrue("Cannot find exception in: $actualException") {
-            actualException.contains("java.lang.Exception") || // jvm
-                    actualException.contains("kotlin.Exception") // ios
+            actualException.contains("Exception") ||
+                    actualException.contains("captureStack@") // js (firefox)
+
         }
     }
 }
