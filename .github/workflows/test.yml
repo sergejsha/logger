@@ -1,8 +1,5 @@
 name: Build
 
-permissions:
-  checks: write
-
 on:
   pull_request:
     paths-ignore:
@@ -29,14 +26,13 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Run jvmTest
+      - name: Run JVM tests
         run: ./gradlew jvmTest --stacktrace
 
-      - name: Publish jvmTest report
+      - name: Publish JVM tests
         uses: mikepenz/action-junit-report@v4
         if: success() || failure()
         with:
-          check_name: JVM tests
           report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
 
   test-js:
@@ -56,21 +52,19 @@ jobs:
         uses: browser-actions/setup-firefox@v1
       - run: firefox --version
 
-      - name: Run jsTest
+      - name: Run Browser and NodeJS tests
         run: ./gradlew jsTest --stacktrace
 
-      - name: Publish jsNodeTest report
+      - name: Publish NodeJS tests
         uses: mikepenz/action-junit-report@v4
         if: success() || failure()
         with:
-          check_name: NodeJS tests
           report_paths: 'logger/build/test-results/jsNodeTest/TEST-*.xml'
 
-      - name: Publish jsBrowserTest report
+      - name: Publish Browser tests
         uses: mikepenz/action-junit-report@v4
         if: success() || failure()
         with:
-          check_name: Browser tests
           report_paths: 'logger/build/test-results/jsBrowserTest/TEST-*.xml'
 
   test-iosX64:
@@ -86,12 +80,11 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Run iosSimulatorArm64Test
+      - name: Run iOS tests
         run: ./gradlew iosSimulatorArm64Test --stacktrace
 
-      - name: Publish iosSimulatorArm64Test report
+      - name: Publish iOS tests
         uses: mikepenz/action-junit-report@v4
         if: success() || failure()
         with:
-          check_name: iOS tests
           report_paths: 'logger/build/test-results/iosSimulatorArm64Test/TEST-*.xml'
