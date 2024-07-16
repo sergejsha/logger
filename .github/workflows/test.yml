@@ -17,7 +17,7 @@ on:
 
 jobs:
   test:
-    name: All tests
+    name: Run tests
 
     strategy:
       matrix:
@@ -44,6 +44,7 @@ jobs:
         if: matrix.task == 'jsTest'
         uses: browser-actions/setup-firefox@v1
       - run: firefox --version
+        if: matrix.task == 'jsTest'
 
       - name: Run ${{ matrix.task }}
         run: ./gradlew ${{ matrix.task }} --stacktrace
