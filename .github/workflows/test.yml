@@ -51,7 +51,7 @@ jobs:
 
       - name: Setup Firefox browser
         uses: browser-actions/setup-firefox@v1
-        run: firefox --version
+      - run: firefox --version
 
       - name: Run jsTest
         run: ./gradlew jsTest --stacktrace
