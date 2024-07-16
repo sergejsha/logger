@@ -14,7 +14,7 @@ on:
 
 jobs:
   test-jvm:
-    name: Run jvmTest
+    name: JVM tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,7 +36,7 @@ jobs:
           report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
 
   test-js:
-    name: Run jsTest
+    name: Browser and NodeJS tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -68,7 +68,7 @@ jobs:
           report_paths: 'logger/build/test-results/jsBrowserTest/TEST-*.xml'
 
   test-iosX64:
-    name: Run iosX64Test
+    name: iOS tests
     runs-on: macos-latest
     steps:
       - name: Checkout
