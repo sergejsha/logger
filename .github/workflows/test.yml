@@ -2,9 +2,15 @@ name: Central build
 
 on:
   pull_request:
+    paths-ignore:
+      - 'documentation/**'
+      - '*.md'
   push:
     branches:
       - master
+    paths-ignore:
+      - 'documentation/**'
+      - '*.md'
 
 jobs:
   test-jvm:
@@ -29,6 +35,36 @@ jobs:
         with:
           check_name: jvmTest report
           report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
+
+  test-js:
+    name: Run jsTest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Run jsTest
+        run: ./gradlew jsTest --stacktrace
+
+      - name: Publish jsNodeTest report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure()
+        with:
+          check_name: jsNodeTest report
+          report_paths: 'logger/build/test-results/jsNodeTest/TEST-*.xml'
+
+      - name: Publish jsBrowserTest report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure()
+        with:
+          check_name: jsBrowserTest report
+          report_paths: 'logger/build/test-results/jsBrowserTest/TEST-*.xml'
 
   test-iosX64:
     name: Run iosX64Test
