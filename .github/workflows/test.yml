@@ -23,11 +23,13 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            task: jvmTest
+            task: jvm
           - os: ubuntu-latest
-            task: jsTest
+            task: jsBrowser
+          - os: ubuntu-latest
+            task: jsNode
           - os: macos-latest
-            task: iosSimulatorArm64Test
+            task: iosSimulatorArm64
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -41,38 +43,17 @@ jobs:
           java-version: '17'
 
       - name: Setup Firefox browser
-        if: matrix.task == 'jsTest'
+        if: matrix.task == 'jsBrowser'
         uses: browser-actions/setup-firefox@v1
       - run: firefox --version
-        if: matrix.task == 'jsTest'
+        if: matrix.task == 'jsBrowser'
 
-      - name: Run ${{ matrix.task }}
-        run: ./gradlew ${{ matrix.task }} --stacktrace
+      - name: Run ${{ matrix.task }} test
+        run: ./gradlew ${{ matrix.task }}Test --stacktrace
 
-      - name: Publish JVM report
+      - name: Publish ${{ matrix.task }} report
         uses: mikepenz/action-junit-report@v4
-        if: matrix.task == 'jvmTest' && (success() || failure())
+        if: success() || failure()
         with:
-          check_name: JVM
-          report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
-
-      - name: Publish NodeJS report
-        uses: mikepenz/action-junit-report@v4
-        if: matrix.task == 'jsTest' && (success() || failure())
-        with:
-          check_name: NodeJS
-          report_paths: 'logger/build/test-results/jsNodeTest/TEST-*.xml'
-
-      - name: Publish Browser report
-        uses: mikepenz/action-junit-report@v4
-        if: matrix.task == 'jsTest' && (success() || failure())
-        with:
-          check_name: Browser
-          report_paths: 'logger/build/test-results/jsBrowserTest/TEST-*.xml'
-
-      - name: Publish iOS report
-        uses: mikepenz/action-junit-report@v4
-        if: matrix.task == 'iosSimulatorArm64Test' && (success() || failure())
-        with:
-          check_name: iOS
-          report_paths: 'logger/build/test-results/iosSimulatorArm64Test/TEST-*.xml'
+          check_name: ${{ matrix.task }}
+          report_paths: "logger/build/test-results/${{ matrix.task }}Test/TEST-*.xml"
