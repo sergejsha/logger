@@ -7,15 +7,9 @@ on:
       - master
 
 jobs:
-  build-and-test:
-    name: Build and test
-
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ ubuntu-latest, macos-latest ]
-
+  test-jvm:
+    name: Run jvmTest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,24 +20,35 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      #      - name: Run jvmTest
-      #        run: ./gradlew jvmTest
-      #        if: matrix.os == 'ubuntu-latest'
+      - name: Run jvmTest
+        run: ./gradlew jvmTest --stacktrace
 
-      #      - name: Publish jvmTest report
-      #        uses: mikepenz/action-junit-report@v4
-      #        if: matrix.os == 'ubuntu-latest' && (success() || failure())
-      #        with:
-      #          check_name: jvmTest report
-      #          report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
+      - name: Publish jvmTest report
+        uses: mikepenz/action-junit-report@v4
+        if: success() || failure()
+        with:
+          check_name: jvmTest report
+          report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
+
+  test-iosX64:
+    name: Run iosX64Test
+    runs-on: macos-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: '17'
 
       - name: Run iosX64Test
-        run: ./gradlew iosX64Test
-        if: matrix.os == 'macos-latest'
+        run: ./gradlew iosX64Test --stacktrace
 
       - name: Publish iosX64Test report
         uses: mikepenz/action-junit-report@v4
-        if: matrix.os == 'macos-latest' && (success() || failure())
+        if: success() || failure()
         with:
           check_name: iosX64Test report
           report_paths: 'logger/build/test-results/iosX64Test/TEST-*.xml'
