@@ -90,7 +90,7 @@ tasks {
     "compileTestKotlinMingwX64" {
         mustRunAfter("signMingwX64Publication")
     }
-    "compileTestIosX64" {
+    "compileTestKotlinIosX64" {
         mustRunAfter("signIosX64Publication")
     }
 }
