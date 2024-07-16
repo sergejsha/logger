@@ -1,8 +1,5 @@
 name: Check
 
-permissions:
-  checks: write
-
 on:
   pull_request:
     paths-ignore:
