@@ -16,32 +16,20 @@ on:
       - '*.md'
 
 jobs:
-  test-jvm:
-    name: JVM tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+  test:
+    name: All tests
 
-      - name: Setup JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'adopt'
-          java-version: '17'
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            task: jvmTest
+          - os: ubuntu-latest
+            task: jsTest
+          - os: macos-latest
+            task: iosSimulatorArm64Test
 
-      - name: Run JVM tests
-        run: ./gradlew jvmTest --stacktrace
-
-      - name: Publish JVM report
-        uses: mikepenz/action-junit-report@v4
-        if: success() || failure()
-        with:
-          check_name: JVM
-          report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
-
-  test-js:
-    name: JS Tests
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,45 +41,37 @@ jobs:
           java-version: '17'
 
       - name: Setup Firefox browser
+        if: matrix.task == 'jsTest'
         uses: browser-actions/setup-firefox@v1
       - run: firefox --version
 
-      - name: Run NodeJS tests
-        run: ./gradlew jsTest --stacktrace
+      - name: Run ${{ matrix.task }}
+        run: ./gradlew ${{ matrix.task }} --stacktrace
+
+      - name: Publish JVM report
+        uses: mikepenz/action-junit-report@v4
+        if: matrix.task == 'jvmTest' && (success() || failure())
+        with:
+          check_name: JVM
+          report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
 
       - name: Publish NodeJS report
         uses: mikepenz/action-junit-report@v4
-        if: success() || failure()
+        if: matrix.task == 'jsTest' && (success() || failure())
         with:
           check_name: NodeJS
           report_paths: 'logger/build/test-results/jsNodeTest/TEST-*.xml'
 
       - name: Publish Browser report
         uses: mikepenz/action-junit-report@v4
-        if: success() || failure()
+        if: matrix.task == 'jsTest' && (success() || failure())
         with:
           check_name: Browser
           report_paths: 'logger/build/test-results/jsBrowserTest/TEST-*.xml'
 
-  test-iosX64:
-    name: iOS tests
-    runs-on: macos-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup JDK 17
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'adopt'
-          java-version: '17'
-
-      - name: Run iOS tests
-        run: ./gradlew iosSimulatorArm64Test --stacktrace
-
-      - name: Publish iOS test report
+      - name: Publish iOS report
         uses: mikepenz/action-junit-report@v4
-        if: success() || failure()
+        if: matrix.task == 'iosSimulatorArm64Test' && (success() || failure())
         with:
           check_name: iOS
           report_paths: 'logger/build/test-results/iosSimulatorArm64Test/TEST-*.xml'
