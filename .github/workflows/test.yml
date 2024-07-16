@@ -86,8 +86,8 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Run iosX64Test
-        run: ./gradlew iosX64Test --stacktrace
+      - name: Run iosSimulatorArm64Test
+        run: ./gradlew iosSimulatorArm64Test --stacktrace
 
       - name: Publish iosSimulatorArm64Test report
         uses: mikepenz/action-junit-report@v4
