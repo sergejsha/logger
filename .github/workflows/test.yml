@@ -49,8 +49,8 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Setup Chrome browser
-        uses: browser-actions/setup-chrome@v1
+      - name: Setup Firefox browser
+        uses: browser-actions/setup-firefox@v1
 
       - name: Run jsTest
         run: ./gradlew jsTest --stacktrace
