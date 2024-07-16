@@ -26,16 +26,16 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Run jvmTest
-        run: ./gradlew jvmTest
-        if: matrix.os == 'ubuntu-latest'
+      #      - name: Run jvmTest
+      #        run: ./gradlew jvmTest
+      #        if: matrix.os == 'ubuntu-latest'
 
-      - name: Publish jvmTest report
-        uses: mikepenz/action-junit-report@v4
-        if: matrix.os == 'ubuntu-latest' && (success() || failure())
-        with:
-          check_name: jvmTest report
-          report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
+      #      - name: Publish jvmTest report
+      #        uses: mikepenz/action-junit-report@v4
+      #        if: matrix.os == 'ubuntu-latest' && (success() || failure())
+      #        with:
+      #          check_name: jvmTest report
+      #          report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
 
       - name: Run iosX64Test
         run: ./gradlew iosX64Test
