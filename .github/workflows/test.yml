@@ -1,5 +1,8 @@
 name: Central build
 
+permissions:
+  checks: write
+
 on:
   pull_request:
     paths-ignore:
@@ -33,7 +36,7 @@ jobs:
         uses: mikepenz/action-junit-report@v4
         if: success() || failure()
         with:
-          check_name: jvmTest report
+          check_name: JVM test report
           report_paths: 'logger/build/test-results/jvmTest/TEST-*.xml'
 
   test-js:
@@ -60,14 +63,14 @@ jobs:
         uses: mikepenz/action-junit-report@v4
         if: success() || failure()
         with:
-          check_name: jsNodeTest report
+          check_name: NodeJS test report
           report_paths: 'logger/build/test-results/jsNodeTest/TEST-*.xml'
 
       - name: Publish jsBrowserTest report
         uses: mikepenz/action-junit-report@v4
         if: success() || failure()
         with:
-          check_name: jsBrowserTest report
+          check_name: Browser test report
           report_paths: 'logger/build/test-results/jsBrowserTest/TEST-*.xml'
 
   test-iosX64:
@@ -90,5 +93,5 @@ jobs:
         uses: mikepenz/action-junit-report@v4
         if: success() || failure()
         with:
-          check_name: iosX64Test report
+          check_name: iOS test report
           report_paths: 'logger/build/test-results/iosX64Test/TEST-*.xml'
