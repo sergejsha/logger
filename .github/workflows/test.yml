@@ -1,4 +1,4 @@
-name: Build and run (jvm) tests
+name: Central build
 
 on:
   pull_request:
