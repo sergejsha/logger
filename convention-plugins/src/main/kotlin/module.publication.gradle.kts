@@ -76,6 +76,30 @@ if (canSign) {
     signing {
         sign(publishing.publications)
     }
+
+    // add missing dependencies
+    /*
+    tasks {
+        "compileTestKotlinIosSimulatorArm64" {
+            mustRunAfter("signIosSimulatorArm64Publication")
+        }
+        "compileTestKotlinIosX64" {
+            mustRunAfter("signIosX64Publication")
+        }
+        "compileTestKotlinIosArm64" {
+            mustRunAfter("signIosArm64Publication")
+        }
+        "compileTestKotlinLinuxX64" {
+            mustRunAfter("signLinuxX64Publication")
+        }
+        "compileTestKotlinMacosX64" {
+            mustRunAfter("signMacosX64Publication")
+        }
+        "compileTestKotlinMingwX64" {
+            mustRunAfter("signMingwX64Publication")
+        }
+    }
+    */
 }
 
 // fix for: https://github.com/gradle/gradle/issues/26091

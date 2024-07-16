@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.1"
+agp = "8.5.0-alpha08" # max version supported by Fleet
 kotlin = "2.0.0"
 
 android-minSdk = "24"

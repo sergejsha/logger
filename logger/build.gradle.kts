@@ -31,8 +31,7 @@ kotlin {
         browser {
             testTask {
                 useKarma {
-                    useChromeHeadless()
-                    useFirefox()
+                    useFirefoxHeadless()
                 }
             }
         }
@@ -67,27 +66,5 @@ publishing {
         pom {
             description.set("Minimalistic Logger for Kotlin Multiplatform")
         }
-    }
-}
-
-// more dependencies fixes (it would be nice to have it in module.publications)
-tasks {
-    "compileTestKotlinIosSimulatorArm64" {
-        mustRunAfter("signIosSimulatorArm64Publication")
-    }
-    "compileTestKotlinIosX64" {
-        mustRunAfter("signIosX64Publication")
-    }
-    "compileTestKotlinIosArm64" {
-        mustRunAfter("signIosArm64Publication")
-    }
-    "compileTestKotlinLinuxX64" {
-        mustRunAfter("signLinuxX64Publication")
-    }
-    "compileTestKotlinMacosX64" {
-        mustRunAfter("signMacosX64Publication")
-    }
-    "compileTestKotlinMingwX64" {
-        mustRunAfter("signMingwX64Publication")
     }
 }
