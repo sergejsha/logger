@@ -75,9 +75,11 @@ tasks {
     "compileTestKotlinIosSimulatorArm64" {
         mustRunAfter("signIosSimulatorArm64Publication")
     }
+    /*
     "compileTestKotlinIosX64" {
         mustRunAfter("signIosX64Publication")
     }
+    */
     "compileTestKotlinIosArm64" {
         mustRunAfter("signIosArm64Publication")
     }
