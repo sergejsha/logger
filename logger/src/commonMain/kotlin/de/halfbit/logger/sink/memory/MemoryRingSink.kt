@@ -21,8 +21,7 @@ public fun LoggerBuilder.registerMemoryRingSink(
     return sink
 }
 
-@PublishedApi
-internal class DefaultMemoryRingSink(
+private class DefaultMemoryRingSink(
     maxEntriesCount: Int,
     private val logPrinter: LogPrinter,
 ) : MemoryRingSink, LogSink {
