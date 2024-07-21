@@ -1,3 +1,4 @@
+/** Copyright 2024 Halfbit GmbH, Sergej Shafarenka */
 package de.halfbit.logger.sink.android
 
 import de.halfbit.logger.LogLevel
@@ -7,7 +8,13 @@ import de.halfbit.logger.sink.LogSink
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ptr
 import kotlinx.datetime.Instant
-import platform.darwin.*
+import platform.darwin.OS_LOG_DEFAULT
+import platform.darwin.OS_LOG_TYPE_DEBUG
+import platform.darwin.OS_LOG_TYPE_ERROR
+import platform.darwin.OS_LOG_TYPE_FAULT
+import platform.darwin.OS_LOG_TYPE_INFO
+import platform.darwin.__dso_handle
+import platform.darwin._os_log_internal
 
 public fun LoggerBuilder.registerIosLogSink(
     logPrinter: LogPrinter = LogPrinter.ShortNoTime
@@ -20,7 +27,13 @@ internal class IosLogSink(
 ) : LogSink {
 
     @OptIn(ExperimentalForeignApi::class)
-    override fun log(level: LogLevel, tag: String, timestamp: Instant, message: String?, err: Throwable?) {
+    override fun log(
+        level: LogLevel,
+        tag: String,
+        timestamp: Instant,
+        message: String?,
+        err: Throwable?
+    ) {
         val iosLogType = when (level) {
             LogLevel.Debug -> OS_LOG_TYPE_DEBUG
             LogLevel.Info -> OS_LOG_TYPE_INFO
