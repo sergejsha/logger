@@ -1,22 +1,21 @@
 /** Copyright 2024 Halfbit GmbH, Sergej Shafarenka */
-package de.halfbit.logger.sink.ios
+package de.halfbit.logger.sink.wasmjs
 
 import de.halfbit.logger.d
 import de.halfbit.logger.e
 import de.halfbit.logger.i
 import de.halfbit.logger.initializeLogger
-import de.halfbit.logger.sink.android.registerIosLogSink
 import de.halfbit.logger.w
 import kotlin.test.Test
 
-private const val TAG = "IosLogger"
+private const val TAG = "JavaScriptLogger"
 
-class IosLogSinkTest {
+class ConsoleLogSinkTest {
 
     @Test
     fun test() {
         initializeLogger {
-            registerIosLogSink()
+            registerConsoleLogSink()
         }
 
         d(TAG) { "hello debug" }

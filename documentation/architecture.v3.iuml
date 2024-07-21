@@ -1,0 +1,51 @@
+@startuml
+skinparam packageStyle rectangle
+hide empty members
+hide stereotype
+hide circle
+
+class "d(TAG) { "Debug" }" as Debug
+class "i(TAG) { "Info" }" as Info
+class "w(TAG) { "Warning" }" as Warn
+class "e(TAG, exception) { "Error" }" as Error
+class "log(TAG, LogLevel, ...)" as Log
+
+Debug -[dotted]- Log : >
+Info -[dotted]- Log : >
+Warn -[dotted]- Log : >
+Error -[dotted]- Log : >
+
+interface LogSink {
+    {abstract} log(TAG, LogLevel, ...)
+}
+
+package ios {
+    class IosLogSink
+}
+
+package android {
+    class AndroidLogSink
+}
+
+package common {
+    class PrintlnSink
+    class MemoryRingSink
+}
+
+package js {
+    class "ConsoleLogSink" as ConsoleLogSinkJs
+}
+
+package wasmjs {
+    class "ConsoleLogSink" as ConsoleLogSinkWasmJs
+}
+
+LogSink <|.. PrintlnSink
+LogSink <|.. MemoryRingSink
+LogSink <|.. AndroidLogSink
+LogSink <|.. IosLogSink
+LogSink <|.. ConsoleLogSinkJs
+LogSink <|.. ConsoleLogSinkWasmJs
+
+Log "1" -[dotted]- "n" LogSink : >
+@enduml
