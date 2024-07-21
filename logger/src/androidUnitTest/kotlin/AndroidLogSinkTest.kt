@@ -21,7 +21,9 @@ class AndroidLogSinkTest {
         d(TAG) { "hello debug" }
         i(TAG) { "hello info" }
         w(TAG) { "hello warning" }
-        e(TAG, Exception()) { "hello error" }
+        w(TAG, Exception()) { "hello warning with exception" }
+        e(TAG) { "hello error" }
+        e(TAG, Exception()) { "hello error with exception" }
 
         // any way to apply assertions here?
     }

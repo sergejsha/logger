@@ -24,12 +24,12 @@ jobs:
         include:
           - os: ubuntu-latest
             task: testDebugUnit # jvm + android
+          - os: macos-latest
+            task: iosSimulatorArm64
           - os: ubuntu-latest
             task: jsBrowser
           - os: ubuntu-latest
-            task: jsNode
-          - os: macos-latest
-            task: iosSimulatorArm64
+            task: wasmJsBrowser
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -43,10 +43,10 @@ jobs:
           java-version: '17'
 
       - name: Setup Firefox browser
-        if: matrix.task == 'jsBrowser'
+        if: matrix.task == 'jsBrowser' || matrix.task == 'wasmJsBrowser'
         uses: browser-actions/setup-firefox@v1
       - run: firefox --version
-        if: matrix.task == 'jsBrowser'
+        if: matrix.task == 'jsBrowser' || matrix.task == 'wasmJsBrowser'
 
       - name: Run ${{ matrix.task }} test
         run: ./gradlew ${{ matrix.task }}Test --stacktrace
