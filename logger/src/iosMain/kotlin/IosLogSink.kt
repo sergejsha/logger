@@ -17,7 +17,7 @@ import platform.darwin.__dso_handle
 import platform.darwin._os_log_internal
 
 public fun LoggerBuilder.registerIosLogSink(
-    logPrinter: LogPrinter = LogPrinter.ShortNoTime
+    logPrinter: LogPrinter = LogPrinter.Default
 ) {
     replaceSink(IosLogSink(logPrinter))
 }

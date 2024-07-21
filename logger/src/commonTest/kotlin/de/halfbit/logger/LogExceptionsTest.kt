@@ -19,7 +19,7 @@ class LogExceptionsTest {
     fun logException() {
         // given
         initializeLogger {
-            memoryRingSink = registerMemoryRingSink(LogPrinter.Short)
+            memoryRingSink = registerMemoryRingSink(LogPrinter.Default)
             getClockNow = { Instant.parse("2024-06-18T23:40:57.120Z") }
         }
 

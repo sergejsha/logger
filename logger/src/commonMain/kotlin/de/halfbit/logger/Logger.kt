@@ -20,7 +20,7 @@ internal data class Logger(
 
 internal fun createInitialLogger(): Logger =
     Logger(
-        sinks = listOf(PrintlnSink(LogPrinter.Short)),
+        sinks = listOf(PrintlnSink(LogPrinter.Default)),
         loggableLevel = LoggableLevel.Everything,
         getClockNow = Clock.System::now,
         initialized = false,

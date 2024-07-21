@@ -13,7 +13,7 @@ public interface MemoryRingSink {
 }
 
 public fun LoggerBuilder.registerMemoryRingSink(
-    logPrinter: LogPrinter = LogPrinter.Short,
+    logPrinter: LogPrinter = LogPrinter.Default,
     maxEntriesCount: Int = 128,
 ): MemoryRingSink {
     val sink = DefaultMemoryRingSink(maxEntriesCount, logPrinter)
