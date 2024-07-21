@@ -100,3 +100,14 @@ publishing {
         }
     }
 }
+
+// https://youtrack.jetbrains.com/issue/KT-61313
+tasks.withType<Sign>().configureEach {
+    val publicationName = name.removePrefix("sign").removeSuffix("Publication")
+    tasks.findByName("linkDebugTest$publicationName")?.let {
+        mustRunAfter(it)
+    }
+    tasks.findByName("compileTestKotlin$publicationName")?.let {
+        mustRunAfter(it)
+    }
+}
