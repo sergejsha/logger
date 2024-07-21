@@ -31,7 +31,7 @@ class LogExceptionsTest {
         assertTrue(stackTrace.size > 3)
 
         val actualMessage = stackTrace[0]
-        val expectedMessage = "23:40:57.120      LogExceptionsTest E Error message"
+        val expectedMessage = "23:40:57.120 .... LogExceptionsTest E Error message"
         assertEquals(expectedMessage, actualMessage)
 
         val actualException = stackTrace[1]

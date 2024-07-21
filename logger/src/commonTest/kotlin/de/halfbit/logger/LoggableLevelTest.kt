@@ -27,7 +27,8 @@ class LoggableLevelTest {
         d(TAG) { "message 1" }
         i(TAG) { "message 2" }
         w(TAG) { "message 3" }
-        e(TAG, Exception()) { "message 4" }
+        e(TAG) { "message 4" }
+        e(TAG, Exception()) { "message 5" }
 
         // then
         val actual = memoryRingSink.getLogEntries()
@@ -36,6 +37,7 @@ class LoggableLevelTest {
             "I message 2",
             "W message 3",
             "E message 4",
+            "E message 5",
         )
         assertContentEquals(expected, actual)
     }
@@ -55,7 +57,8 @@ class LoggableLevelTest {
         d(TAG) { "message 1" }
         i(TAG) { "message 2" }
         w(TAG) { "message 3" }
-        e(TAG, Exception()) { "message 4" }
+        e(TAG) { "message 4" }
+        e(TAG, Exception()) { "message 5" }
 
         // then
         val actual = memoryRingSink.getLogEntries()
@@ -63,6 +66,7 @@ class LoggableLevelTest {
             "I message 2",
             "W message 3",
             "E message 4",
+            "E message 5",
         )
         assertContentEquals(expected, actual)
     }
@@ -82,13 +86,15 @@ class LoggableLevelTest {
         d(TAG) { "message 1" }
         i(TAG) { "message 2" }
         w(TAG) { "message 3" }
-        e(TAG, Exception()) { "message 4" }
+        e(TAG) { "message 4" }
+        e(TAG, Exception()) { "message 5" }
 
         // then
         val actual = memoryRingSink.getLogEntries()
         val expected = listOf(
             "W message 3",
             "E message 4",
+            "E message 5",
         )
         assertContentEquals(expected, actual)
     }
@@ -108,12 +114,14 @@ class LoggableLevelTest {
         d(TAG) { "message 1" }
         i(TAG) { "message 2" }
         w(TAG) { "message 3" }
-        e(TAG, Exception()) { "message 4" }
+        e(TAG) { "message 4" }
+        e(TAG, Exception()) { "message 5" }
 
         // then
         val actual = memoryRingSink.getLogEntries()
         val expected = listOf(
             "E message 4",
+            "E message 5",
         )
         assertContentEquals(expected, actual)
     }
@@ -133,7 +141,8 @@ class LoggableLevelTest {
         d(TAG) { "message 1" }
         i(TAG) { "message 2" }
         w(TAG) { "message 3" }
-        e(TAG, Exception()) { "message 4" }
+        e(TAG) { "message 4" }
+        e(TAG, Exception()) { "message 5" }
 
         // then
         val actual = memoryRingSink.getLogEntries()

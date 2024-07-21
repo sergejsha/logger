@@ -32,9 +32,9 @@ class LogPrinterTest {
         // then
         val actual = memoryRingSink.getLogEntries()
         val expected = listOf(
-            "                Reader D Reading data",
-            "             Messenger I Sending message",
-            "       ReadableChannel W Sending message",
+            "............... Reader D Reading data",
+            "............ Messenger I Sending message",
+            "...... ReadableChannel W Sending message",
             "DefaultRea..oteChannel D Reading more data",
             "SimpleRead..oteChannel D Reading even more data",
         )
@@ -59,9 +59,9 @@ class LogPrinterTest {
         // then
         val actual = memoryRingSink.getLogEntries()
         val expected = listOf(
-            "23:40:57.120                 Reader D Reading data",
-            "23:40:57.120              Messenger I Sending message",
-            "23:40:57.120        ReadableChannel W Sending message",
+            "23:40:57.120 ............... Reader D Reading data",
+            "23:40:57.120 ............ Messenger I Sending message",
+            "23:40:57.120 ...... ReadableChannel W Sending message",
             "23:40:57.120 DefaultRea..oteChannel D Reading more data",
             "23:40:57.120 SimpleRead..oteChannel D Reading even more data",
         )

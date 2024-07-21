@@ -12,8 +12,14 @@ public fun LoggerBuilder.registerAndroidLogSink() {
 }
 
 internal object AndroidLogSink : LogSink {
-    override fun log(level: LogLevel, tag: String, timestamp: Instant, message: String?, err: Throwable?) {
-        val msg = if (message == null) "" else message
+    override fun log(
+        level: LogLevel,
+        tag: String,
+        timestamp: Instant,
+        message: String?,
+        err: Throwable?
+    ) {
+        val msg = message ?: ""
         when (level) {
             LogLevel.Debug -> Log.d(tag, msg)
             LogLevel.Info -> Log.i(tag, msg)

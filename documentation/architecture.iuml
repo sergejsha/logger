@@ -19,6 +19,10 @@ interface LogSink {
     {abstract} log(TAG, LogLevel, ...)
 }
 
+package ios {
+    class IosLogSink
+}
+
 package android {
     class AndroidLogSink
 }
@@ -31,6 +35,7 @@ package common {
 LogSink <|.. PrintlnSink
 LogSink <|.. MemoryRingSink
 LogSink <|.. AndroidLogSink
+LogSink <|.. IosLogSink
 
-Log "1" -[dotted]- "N" LogSink : >
+Log "1" -[dotted]- "n" LogSink : >
 @enduml

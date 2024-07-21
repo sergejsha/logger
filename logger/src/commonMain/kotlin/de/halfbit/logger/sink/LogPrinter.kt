@@ -43,11 +43,21 @@ private class PrettyLogPrinter(
         val tagMaxLength: Int,
     )
 
-    override fun invoke(level: LogLevel, tag: String, timestamp: Instant, message: String?, err: Throwable?): String =
+    override fun invoke(
+        level: LogLevel,
+        tag: String,
+        timestamp: Instant,
+        message: String?,
+        err: Throwable?
+    ): String =
         buildString {
             if (layout.timestamp == Timestamp.Time) {
                 val iso8601String = timestamp.toString() // 2023-01-02T23:40:57.120Z
-                val timeString = if (iso8601String.length >= 24) iso8601String.substring(11, 23) else iso8601String
+                val timeString = if (iso8601String.length >= 24) {
+                    iso8601String.substring(11, 23)
+                } else {
+                    iso8601String
+                }
                 append(timeString)
                 append(' ')
             }
@@ -86,7 +96,14 @@ private fun StringBuilder.appendTag(tag: String, maxLength: Int) {
     // see LogPrinterTest
 
     if (tag.length <= maxLength) {
-        append(tag.padStart(maxLength, ' '))
+        val indent = maxLength - tag.length
+        if (indent > 1) {
+            append(".".repeat(indent - 1))
+            append(' ')
+            append(tag)
+        } else {
+            append(tag.padStart(maxLength, ' '))
+        }
         return
     }
 
