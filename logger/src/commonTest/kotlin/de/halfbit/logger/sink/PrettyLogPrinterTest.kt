@@ -157,4 +157,80 @@ class PrettyLogPrinterTest {
         )
         assertContentEquals(expected, actual)
     }
+
+    @Test
+    fun wrappedSquareBracketsLogPrinter() {
+        // given
+        initializeLogger {
+            memoryRingSink = registerMemoryRingSink(
+                buildLogPrinter {
+                    timestamp { timeOnly() }
+                    tag {
+                        wrapped {
+                            length(22)
+                            useSquareBrackets(true)
+                        }
+                    }
+                    logLevel { short() }
+                }
+            )
+            getClockNow = { Instant.parse("2024-06-18T23:40:57.120Z") }
+        }
+
+        // when
+        d("Reader") { "Reading data" }
+        i("Messenger") { "Sending message" }
+        w("ReadableChannel") { "Sending message" }
+        d("DefaultReadableRemoteChannel") { "Reading more data" }
+        d("SimpleReadableRemoteChannel") { "Reading even more data" }
+
+        // then
+        val actual = memoryRingSink.getLogEntries()
+        val expected = listOf(
+            "23:40:57.120 [Reader] D Reading data",
+            "23:40:57.120 [Messenger] I Sending message",
+            "23:40:57.120 [ReadableChannel] W Sending message",
+            "23:40:57.120 [DefaultReadableRemoteC] D Reading more data",
+            "23:40:57.120 [SimpleReadableRemoteCh] D Reading even more data",
+        )
+        assertContentEquals(expected, actual)
+    }
+
+    @Test
+    fun paddedSquareBracketsLogPrinter() {
+        // given
+        initializeLogger {
+            memoryRingSink = registerMemoryRingSink(
+                buildLogPrinter {
+                    timestamp { none() }
+                    tag {
+                        padded {
+                            length(22)
+                            useSquareBrackets(true)
+                        }
+                    }
+                    logLevel { short() }
+                }
+            )
+            getClockNow = { Instant.parse("2024-06-18T23:40:57.120Z") }
+        }
+
+        // when
+        d("Reader") { "Reading data" }
+        i("Messenger") { "Sending message" }
+        w("ReadableChannel") { "Sending message" }
+        d("DefaultReadableRemoteChannel") { "Reading more data" }
+        d("SimpleReadableRemoteChannel") { "Reading even more data" }
+
+        // then
+        val actual = memoryRingSink.getLogEntries()
+        val expected = listOf(
+            "[............... Reader] D Reading data",
+            "[............ Messenger] I Sending message",
+            "[...... ReadableChannel] W Sending message",
+            "[DefaultRea..oteChannel] D Reading more data",
+            "[SimpleRead..oteChannel] D Reading even more data",
+        )
+        assertContentEquals(expected, actual)
+    }
 }

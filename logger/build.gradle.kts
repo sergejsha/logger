@@ -40,6 +40,11 @@ kotlin {
                     }
                 }
             }
+            testTask {
+                useKarma {
+                    useFirefoxHeadless()
+                }
+            }
         }
     }
     js {
