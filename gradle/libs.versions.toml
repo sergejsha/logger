@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.1"
+agp = "8.5.1" # max version supported by Fleet
 kotlin = "2.0.0"
 
 android-minSdk = "24"
@@ -8,12 +8,25 @@ android-compileSdk = "34"
 kotlinx-datetime = "0.6.0"
 kotlinx-atomicfu = "0.25.0"
 
+# sample apps
+compose-plugin = "1.6.11"
+activity-compose = "1.9.0"
+android-targetSdk = "34"
+
 [libraries]
+# logger
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
+
+# sample apps
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-atomicfu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "kotlinx-atomicfu" }
+# logger
+android-application = { id = "com.android.application", version.ref = "agp" }
+jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
