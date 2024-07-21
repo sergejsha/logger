@@ -15,16 +15,16 @@ publishing {
                 name = "central"
                 url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                 credentials {
-                    username = project.getPropertyOrEmptyString("publishing.nexus.user")
-                    password = project.getPropertyOrEmptyString("publishing.nexus.password")
+                    username = project.getPropertyOrEmpty("publishing.nexus.user")
+                    password = project.getPropertyOrEmpty("publishing.nexus.password")
                 }
             }
             maven {
                 name = "snapshot"
                 url = uri("https://oss.sonatype.org/content/repositories/snapshots")
                 credentials {
-                    username = project.getPropertyOrEmptyString("publishing.nexus.user")
-                    password = project.getPropertyOrEmptyString("publishing.nexus.password")
+                    username = project.getPropertyOrEmpty("publishing.nexus.user")
+                    password = project.getPropertyOrEmpty("publishing.nexus.password")
                 }
             }
         }
@@ -57,14 +57,14 @@ publishing {
             scm {
                 connection.set("scm:git:git@github.com:sergejsha/${rootProject.name}.git")
                 developerConnection.set("scm:git:ssh://github.com:sergejsha/${rootProject.name}.git")
-                url.set("https://github.com/sergejsha/logger")
+                url.set("https://github.com/sergejsha/${rootProject.name}")
             }
         }
     }
 }
 
-private fun Project.getPropertyOrEmptyString(name: String): String =
-    if (hasProperty(name)) property(name) as String? ?: "" else ""
+private fun Project.getPropertyOrEmpty(name: String): String =
+    findProperty(name)?.toString() ?: ""
 
 val canSign = project.hasProperty("signing.keyId")
 if (canSign) {
@@ -76,30 +76,6 @@ if (canSign) {
     signing {
         sign(publishing.publications)
     }
-
-    // add missing dependencies
-    /*
-    tasks {
-        "compileTestKotlinIosSimulatorArm64" {
-            mustRunAfter("signIosSimulatorArm64Publication")
-        }
-        "compileTestKotlinIosX64" {
-            mustRunAfter("signIosX64Publication")
-        }
-        "compileTestKotlinIosArm64" {
-            mustRunAfter("signIosArm64Publication")
-        }
-        "compileTestKotlinLinuxX64" {
-            mustRunAfter("signLinuxX64Publication")
-        }
-        "compileTestKotlinMacosX64" {
-            mustRunAfter("signMacosX64Publication")
-        }
-        "compileTestKotlinMingwX64" {
-            mustRunAfter("signMingwX64Publication")
-        }
-    }
-    */
 }
 
 // fix for: https://github.com/gradle/gradle/issues/26091
@@ -107,4 +83,3 @@ if (canSign) {
 tasks.withType<AbstractPublishToMaven>().configureEach {
     dependsOn(project.tasks.withType(Sign::class.java))
 }
-
