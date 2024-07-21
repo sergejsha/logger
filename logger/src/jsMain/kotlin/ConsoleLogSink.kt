@@ -5,12 +5,24 @@ import de.halfbit.logger.LogLevel
 import de.halfbit.logger.LoggerBuilder
 import de.halfbit.logger.sink.LogPrinter
 import de.halfbit.logger.sink.LogSink
+import de.halfbit.logger.sink.buildLogPrinter
 import kotlinx.datetime.Instant
 
 public fun LoggerBuilder.registerConsoleLogSink(
-    logPrinter: LogPrinter = LogPrinter.ShortNoTime
+    logPrinter: LogPrinter = browserLogPrinter
 ) {
     replaceSink(ConsoleLogSink(logPrinter))
+}
+
+private val browserLogPrinter = buildLogPrinter {
+    timestamp { none() }
+    tag {
+        wrapped {
+            length(30)
+            useSquareBrackets(true)
+        }
+    }
+    logLevel { none() }
 }
 
 internal class ConsoleLogSink(

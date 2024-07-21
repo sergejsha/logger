@@ -1,10 +1,7 @@
 /** Copyright 2024 Halfbit GmbH, Sergej Shafarenka */
 package de.halfbit.logger
 
-import de.halfbit.logger.LogLevel.Debug
-import de.halfbit.logger.LogLevel.Error
-import de.halfbit.logger.LogLevel.Info
-import de.halfbit.logger.LogLevel.Warning
+import de.halfbit.logger.LogLevel.*
 import de.halfbit.logger.sink.LogSink
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
@@ -100,7 +97,7 @@ private fun initializeCurrentLogger(
 }
 
 @DslMarker
-public annotation class LoggerDsl
+internal annotation class LoggerDsl
 
 @LoggerDsl
 public data class LoggerBuilder
