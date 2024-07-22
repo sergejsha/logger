@@ -76,7 +76,7 @@ override fun onCreate() {
 ```kotlin
 fun main() {
     initializeLogger {
-        registerPrintlnLogSink()
+        registerPrintlnSink()
     }
 }
 ```
