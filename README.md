@@ -15,8 +15,8 @@ shared with the awesome Kotlin community.
 class App : Application() {
     override fun onCreate() {
         initializeLogger {
+            registerPrintlnSink() // used by default if no sinks are configured
             registerAndroidLogSink()
-            registerPrintlnSink() // default, if no sinks are configured
             registerMemoryRingSink()
             loggableLevel = if (isDebugBuild) Everything else InfoAndSevere
         }
@@ -26,22 +26,74 @@ class App : Application() {
 // Use logger
 private const val TAG = "Reader"
 
-class Reader {
+class Reader(private val bufferSize: Int) {
+
     init {
-        i(TAG) { "created: size=${bytes?.size}" } // info
-        d(TAG) { "created: size=${bytes?.size}" } // debug
+        i(TAG) { "created: size=$bufferSize" } // info
+        d(TAG) { "created: size=$bufferSize" } // debug
     }
 
     suspend fun readData() {
         try {
             httpClient.post("read-data")
         } catch (e: Exception) {
-            w(TAG, e) { "read-data failed" } // warning
-            e(TAG, e) { "read-data failed" } // error
+            w(TAG, e) { "data reading failed" } // warning
+            e(TAG, e) // error
         }
     }
 }
 ```
+
+## iOS usage
+
+```swift
+init() {
+    LogKt.initializeLogger { builder in
+        builder.registerIosLogSink(logPrinter: LogPrinterCompanion.shared.Default)
+    }
+}
+
+private let TAG = "SampleApp"
+LogKt.d(tag: "\(TAG)Debug") { "debug message" }
+```
+
+![iOS log](https://raw.githubusercontent.com/sergejsha/logger/master/documentation/examples/iOS.png)
+
+## Android usage
+
+```kotlin
+override fun onCreate() {
+    initializeLogger {
+        registerAndroidLogSink()
+    }
+}
+```
+
+![Android log](https://raw.githubusercontent.com/sergejsha/logger/master/documentation/examples/android.png)
+
+## Desktop usage
+
+```kotlin
+fun main() {
+    initializeLogger {
+        registerPrintlnLogSink()
+    }
+}
+```
+
+![Desktop log](https://raw.githubusercontent.com/sergejsha/logger/master/documentation/examples/desktop.png)
+
+## Browser usage
+
+```kotlin
+fun main() {
+    initializeLogger {
+        registerConsoleLogSink()
+    }
+}
+```
+
+![Browser log](https://raw.githubusercontent.com/sergejsha/logger/master/documentation/examples/jsBrowser.png)
 
 # Dependencies
 
