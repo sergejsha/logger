@@ -68,6 +68,9 @@ kotlin {
         val wasmJsMain by getting
         val wasmJsTest by getting
 
+        val androidMain by getting
+        val androidUnitTest by getting
+
         commonMain.dependencies {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.atomicfu)

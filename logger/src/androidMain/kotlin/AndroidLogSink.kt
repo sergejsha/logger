@@ -11,7 +11,7 @@ public fun LoggerBuilder.registerAndroidLogSink() {
     replaceSink(AndroidLogSink)
 }
 
-internal object AndroidLogSink : LogSink {
+private object AndroidLogSink : LogSink {
     override fun log(
         level: LogLevel,
         tag: String,
