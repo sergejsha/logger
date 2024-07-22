@@ -8,13 +8,7 @@ import de.halfbit.logger.sink.LogSink
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ptr
 import kotlinx.datetime.Instant
-import platform.darwin.OS_LOG_DEFAULT
-import platform.darwin.OS_LOG_TYPE_DEBUG
-import platform.darwin.OS_LOG_TYPE_ERROR
-import platform.darwin.OS_LOG_TYPE_FAULT
-import platform.darwin.OS_LOG_TYPE_INFO
-import platform.darwin.__dso_handle
-import platform.darwin._os_log_internal
+import platform.darwin.*
 
 public fun LoggerBuilder.registerIosLogSink(
     logPrinter: LogPrinter = LogPrinter.Default
@@ -22,7 +16,7 @@ public fun LoggerBuilder.registerIosLogSink(
     replaceSink(IosLogSink(logPrinter))
 }
 
-internal class IosLogSink(
+private class IosLogSink(
     private val logPrinter: LogPrinter,
 ) : LogSink {
 

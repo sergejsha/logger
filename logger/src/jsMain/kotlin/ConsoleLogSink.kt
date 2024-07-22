@@ -25,7 +25,7 @@ private val browserLogPrinter = buildLogPrinter {
     logLevel { none() }
 }
 
-internal class ConsoleLogSink(
+private class ConsoleLogSink(
     private val logPrinter: LogPrinter,
 ) : LogSink {
 
