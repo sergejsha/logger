@@ -16,8 +16,8 @@ class App : Application() {
     override fun onCreate() {
         initializeLogger {
             registerPrintlnSink() // used by default if no sinks are configured
-            registerAndroidLogSink()
             registerMemoryRingSink()
+            registerAndroidLogSink()
             loggableLevel = if (isDebugBuild) Everything else InfoAndSevere
         }
     }
