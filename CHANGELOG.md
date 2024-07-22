@@ -5,7 +5,7 @@
 - Support WebAssembly (WasmJS) platform.
 - Add LogSink for iOS (`IosLogSink`).
 - Add LogSink for JS (`js.ConsoleLogSink`).
-- Add LogSink for WasmJs (`wasmjs.ConsoleLogSink`).
+- Add LogSink for WasmJS (`wasmjs.ConsoleLogSink`).
 - Add `buildLogPrinter` DSL for configuring log printers.
 - Add sample apps for supported platforms.
 
