@@ -13,10 +13,18 @@ public inline fun d(tag: String, getMessage: () -> String) {
     }
 }
 
+public inline fun d(tag: LoggerTag, getMessage: () -> String) {
+    if (tag.enabled) d(tag.name, getMessage)
+}
+
 public inline fun i(tag: String, getMessage: () -> String) {
     if (currentLogger.loggableLevel.weight <= Info.weight) {
         log(Info, tag, getMessage(), null)
     }
+}
+
+public inline fun i(tag: LoggerTag, getMessage: () -> String) {
+    if (tag.enabled) i(tag.name, getMessage)
 }
 
 public inline fun w(tag: String, getMessage: () -> String) {
@@ -25,10 +33,18 @@ public inline fun w(tag: String, getMessage: () -> String) {
     }
 }
 
+public inline fun w(tag: LoggerTag, getMessage: () -> String) {
+    if (tag.enabled) w(tag.name, getMessage)
+}
+
 public inline fun w(tag: String, err: Throwable, getMessage: () -> String) {
     if (currentLogger.loggableLevel.weight <= Warning.weight) {
         log(Warning, tag, getMessage(), err)
     }
+}
+
+public inline fun w(tag: LoggerTag, err: Throwable, getMessage: () -> String) {
+    if (tag.enabled) w(tag.name, err, getMessage)
 }
 
 public inline fun e(tag: String, getMessage: () -> String) {
@@ -37,16 +53,28 @@ public inline fun e(tag: String, getMessage: () -> String) {
     }
 }
 
+public inline fun e(tag: LoggerTag, getMessage: () -> String) {
+    if (tag.enabled) e(tag.name, getMessage)
+}
+
 public inline fun e(tag: String, err: Throwable, getMessage: () -> String) {
     if (currentLogger.loggableLevel.weight <= Error.weight) {
         log(Error, tag, getMessage(), err)
     }
 }
 
+public inline fun e(tag: LoggerTag, err: Throwable, getMessage: () -> String) {
+    if (tag.enabled) e(tag.name, err, getMessage)
+}
+
 public fun e(tag: String, err: Throwable) {
     if (currentLogger.loggableLevel.weight <= Error.weight) {
         log(Error, tag, null, err)
     }
+}
+
+public fun e(tag: LoggerTag, err: Throwable) {
+    if (tag.enabled) e(tag.name, err)
 }
 
 @PublishedApi
