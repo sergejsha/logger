@@ -95,6 +95,23 @@ fun main() {
 
 ![Browser log](https://raw.githubusercontent.com/sergejsha/logger/master/documentation/examples/jsBrowser.png)
 
+# How to
+
+## Disable logger for a class
+
+```kotlin
+// Create a named tag instance instead of a string-tag
+private val tag = namedTag("ScaleAnimation")
+
+// Use the tag in log-functions
+d(tag) { "animation started" }
+d(tag) { "scale: ${scale.value}" }
+...
+
+// Set a loggable level to disable unwanted logs for this tag
+private val tag = namedTag("ScaleAnimation", LoggableLevel.Nothing)
+```
+
 # Dependencies
 
 In `gradle/libs.versions.toml`
@@ -127,10 +144,15 @@ kotlin {
 }
 ```
 
-# Releasing
+# Publishing
 
 1. Bump version in `root.publication.gradle.kts`
 2. `./gradlew clean build publishAllPublicationsToCentralRepository`
+
+## Local maven
+
+1. Set `X.X-SNAPSHOT` version in `root.publication.gradle.kts`
+2. `./gradlew clean build publishToMavenLocal`
 
 # License
 

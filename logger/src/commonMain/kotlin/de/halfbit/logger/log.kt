@@ -13,9 +13,21 @@ public inline fun d(tag: String, getMessage: () -> String) {
     }
 }
 
+public inline fun d(tag: LogTag, getMessage: () -> String) {
+    if (tag.loggableLevel.weight <= Debug.weight) {
+        d(tag.name, getMessage)
+    }
+}
+
 public inline fun i(tag: String, getMessage: () -> String) {
     if (currentLogger.loggableLevel.weight <= Info.weight) {
         log(Info, tag, getMessage(), null)
+    }
+}
+
+public inline fun i(tag: LogTag, getMessage: () -> String) {
+    if (tag.loggableLevel.weight <= Info.weight) {
+        i(tag.name, getMessage)
     }
 }
 
@@ -25,9 +37,21 @@ public inline fun w(tag: String, getMessage: () -> String) {
     }
 }
 
+public inline fun w(tag: LogTag, getMessage: () -> String) {
+    if (tag.loggableLevel.weight <= Warning.weight) {
+        w(tag.name, getMessage)
+    }
+}
+
 public inline fun w(tag: String, err: Throwable, getMessage: () -> String) {
     if (currentLogger.loggableLevel.weight <= Warning.weight) {
         log(Warning, tag, getMessage(), err)
+    }
+}
+
+public inline fun w(tag: LogTag, err: Throwable, getMessage: () -> String) {
+    if (tag.loggableLevel.weight <= Warning.weight) {
+        w(tag.name, err, getMessage)
     }
 }
 
@@ -37,15 +61,33 @@ public inline fun e(tag: String, getMessage: () -> String) {
     }
 }
 
+public inline fun e(tag: LogTag, getMessage: () -> String) {
+    if (tag.loggableLevel.weight <= Error.weight) {
+        e(tag.name, getMessage)
+    }
+}
+
 public inline fun e(tag: String, err: Throwable, getMessage: () -> String) {
     if (currentLogger.loggableLevel.weight <= Error.weight) {
         log(Error, tag, getMessage(), err)
     }
 }
 
+public inline fun e(tag: LogTag, err: Throwable, getMessage: () -> String) {
+    if (tag.loggableLevel.weight <= Error.weight) {
+        e(tag.name, err, getMessage)
+    }
+}
+
 public fun e(tag: String, err: Throwable) {
     if (currentLogger.loggableLevel.weight <= Error.weight) {
         log(Error, tag, null, err)
+    }
+}
+
+public fun e(tag: LogTag, err: Throwable) {
+    if (tag.loggableLevel.weight <= Error.weight) {
+        e(tag.name, err)
     }
 }
 

@@ -1,5 +1,9 @@
 # Change log
 
+## unreleased
+
+- Ability to control loggable level per class (#20)
+
 ## 0.5
 
 - Support WebAssembly (WasmJS) platform.
