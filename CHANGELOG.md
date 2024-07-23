@@ -2,7 +2,7 @@
 
 ## unreleased
 
-- Add `LogTag`, `namedTag()` and enhance log functions (#20)
+- Ability to control loggable level per class (#20)
 
 ## 0.5
 

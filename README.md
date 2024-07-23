@@ -97,10 +97,10 @@ fun main() {
 
 # How to
 
-## Enable/disable logger for a single tag
+## Disable logger for a class
 
 ```kotlin
-// Create a named tag instance instead of a string
+// Create a named tag instance instead of a string-tag
 private val tag = namedTag("ScaleAnimation")
 
 // Use the tag in log-functions
