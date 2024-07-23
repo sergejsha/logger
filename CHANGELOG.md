@@ -1,5 +1,9 @@
 # Change log
 
+## unreleased
+
+- Add `LogTag`, `namedTag()` and enhance log functions (#20)
+
 ## 0.5
 
 - Support WebAssembly (WasmJS) platform.
