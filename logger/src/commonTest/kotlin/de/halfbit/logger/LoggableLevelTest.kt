@@ -14,7 +14,6 @@ class LoggableLevelTest {
 
     @Test
     fun everythingLevelLogsDebugInfoWarnAndError() {
-
         // given
         initializeLogger {
             loggableLevel = LoggableLevel.Everything
