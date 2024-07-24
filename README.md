@@ -112,6 +112,17 @@ d(tag) { "scale: ${scale.value}" }
 private val tag = namedTag("ScaleAnimation", LoggableLevel.Nothing)
 ```
 
+## Use class name for tags
+
+```kotlin
+class Reader {
+    private val tag = classTag<Reader>()
+    init {
+        d(tag) { "Reader is created" }
+    }
+}
+```
+
 # Dependencies
 
 In `gradle/libs.versions.toml`
