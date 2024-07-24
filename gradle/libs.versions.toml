@@ -1,5 +1,5 @@
 [versions]
-agp = "8.5.1" # max version supported by Fleet
+agp = "8.2.0"
 kotlin = "2.0.0"
 
 android-minSdk = "24"
@@ -16,6 +16,7 @@ android-targetSdk = "34"
 [libraries]
 # logger
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
 

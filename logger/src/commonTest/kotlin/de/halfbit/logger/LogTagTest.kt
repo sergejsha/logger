@@ -1,3 +1,4 @@
+/** Copyright 2024 Halfbit GmbH, Sergej Shafarenka */
 package de.halfbit.logger
 
 import de.halfbit.logger.sink.memory.MemoryRingSink
@@ -90,4 +91,37 @@ class LogTagTest {
         assertContentEquals(expected, actual)
     }
 
+    @Test
+    fun classTag_usesSimpleClassNameAsTag() {
+        // given
+        initializeLogger {
+            loggableLevel = LoggableLevel.Everything
+            memoryRingSink = registerMemoryRingSink(
+                logPrinter = { level, tag, _, message, _ -> "$tag ${level.short} $message" }
+            )
+        }
+        val tag = classTag<LogTagTest>()
+
+        // when
+        d(tag) { "message 1" }
+        i(tag) { "message 2" }
+        w(tag) { "message 3" }
+        w(tag, Exception()) { "message 4" }
+        e(tag) { "message 5" }
+        e(tag, Exception()) { "message 6" }
+        e(tag, Exception())
+
+        // then
+        val actual = memoryRingSink.getLogEntries()
+        val expected = listOf(
+            "LogTagTest D message 1",
+            "LogTagTest I message 2",
+            "LogTagTest W message 3",
+            "LogTagTest W message 4",
+            "LogTagTest E message 5",
+            "LogTagTest E message 6",
+            "LogTagTest E null",
+        )
+        assertContentEquals(expected, actual)
+    }
 }
