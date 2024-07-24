@@ -61,22 +61,30 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
+    applyDefaultHierarchyTemplate()
+
     sourceSets {
-        val jsMain by getting
-        val jsTest by getting
-
-        val wasmJsMain by getting
-        val wasmJsTest by getting
-
-        val androidMain by getting
-        val androidUnitTest by getting
-
         commonMain.dependencies {
             implementation(libs.kotlinx.datetime)
             implementation(libs.kotlinx.atomicfu)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        val androidUnitTest by getting
+
+        val javaMain by creating {
+            dependsOn(commonMain.get())
+            androidMain.get().dependsOn(this)
+            jvmMain.get().dependsOn(this)
+        }
+        val javaTest by creating {
+            androidUnitTest.dependsOn(this)
+            jvmTest.get().dependsOn(this)
+            dependencies {
+                implementation(libs.kotlin.test.junit)
+            }
         }
     }
 }

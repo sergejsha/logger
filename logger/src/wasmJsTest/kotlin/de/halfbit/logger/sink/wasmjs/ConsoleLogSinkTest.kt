@@ -1,11 +1,7 @@
 /** Copyright 2024 Halfbit GmbH, Sergej Shafarenka */
 package de.halfbit.logger.sink.wasmjs
 
-import de.halfbit.logger.d
-import de.halfbit.logger.e
-import de.halfbit.logger.i
-import de.halfbit.logger.initializeLogger
-import de.halfbit.logger.w
+import de.halfbit.logger.*
 import kotlin.test.Test
 
 private const val TAG = "JavaScriptLogger"
