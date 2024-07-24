@@ -2,7 +2,8 @@
 
 ## unreleased
 
-- Ability to control loggable level per class (#20)
+- Added: Control loggable level per class (#20)
+- Added: Auto-detect tag names on iOS, Android and JVM platforms (#21)
 
 ## 0.5
 
