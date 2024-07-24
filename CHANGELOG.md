@@ -1,6 +1,6 @@
 # Change log
 
-## unreleased
+## 0.6
 
 - Added: Control loggable level per class (#20)
 - Added: Auto-detect tag names on iOS, Android and JVM platforms (#21)
