@@ -117,6 +117,7 @@ private val tag = namedTag("ScaleAnimation", LoggableLevel.Nothing)
 ```kotlin
 class Reader {
     private val tag = classTag<Reader>()
+
     init {
         d(tag) { "Reader is created" }
     }
@@ -130,7 +131,7 @@ In `gradle/libs.versions.toml`
 ```toml
 [versions]
 kotlin = "2.0.0"
-logger = "0.5"
+logger = "0.6"
 
 [libraries]
 logger = { module = "de.halfbit:logger", version.ref = "logger" }
