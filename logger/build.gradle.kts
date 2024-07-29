@@ -61,7 +61,15 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    applyDefaultHierarchyTemplate()
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    applyDefaultHierarchyTemplate {
+        common {
+            group("java") {
+                withJvm()
+                withAndroidNative()
+            }
+        }
+    }
 
     sourceSets {
         commonMain.dependencies {
@@ -70,21 +78,6 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-        }
-
-        val androidUnitTest by getting
-
-        val javaMain by creating {
-            dependsOn(commonMain.get())
-            androidMain.get().dependsOn(this)
-            jvmMain.get().dependsOn(this)
-        }
-        val javaTest by creating {
-            androidUnitTest.dependsOn(this)
-            jvmTest.get().dependsOn(this)
-            dependencies {
-                implementation(libs.kotlin.test.junit)
-            }
         }
     }
 }
