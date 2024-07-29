@@ -106,10 +106,9 @@ private fun description(value: String) {
             }
         }
     }
-    applyDefaultTaskDependencies()
 }
 
-private fun applyDefaultTaskDependencies() {
+project.afterEvaluate {
     // https://youtrack.jetbrains.com/issue/KT-61313
     tasks.withType<Sign>().configureEach {
         val publicationName = name.removePrefix("sign").removeSuffix("Publication")
