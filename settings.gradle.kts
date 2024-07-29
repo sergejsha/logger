@@ -1,5 +1,4 @@
 pluginManagement {
-    includeBuild("convention-plugins")
     repositories {
         google()
         mavenCentral()
@@ -16,6 +15,7 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "logger"
+includeBuild("build-plugins")
 include(":logger")
 include(":sample-apps:shared")
 include(":sample-apps:composeApp")
