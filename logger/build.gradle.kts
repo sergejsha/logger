@@ -61,7 +61,15 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
 
-    applyDefaultHierarchyTemplate()
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    applyDefaultHierarchyTemplate {
+        common {
+            group("java") {
+                withJvm()
+                withAndroidNative()
+            }
+        }
+    }
 
     sourceSets {
         commonMain.dependencies {
@@ -70,21 +78,6 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
-        }
-
-        val androidUnitTest by getting
-
-        val javaMain by creating {
-            dependsOn(commonMain.get())
-            androidMain.get().dependsOn(this)
-            jvmMain.get().dependsOn(this)
-        }
-        val javaTest by creating {
-            androidUnitTest.dependsOn(this)
-            jvmTest.get().dependsOn(this)
-            dependencies {
-                implementation(libs.kotlin.test.junit)
-            }
         }
     }
 }
@@ -103,22 +96,6 @@ android {
     }
 }
 
-// Customization of module.publications
-publishing {
-    publications.withType<MavenPublication> {
-        pom {
-            description.set("Minimalistic Logger for Kotlin Multiplatform")
-        }
-    }
-}
-
-// https://youtrack.jetbrains.com/issue/KT-61313
-tasks.withType<Sign>().configureEach {
-    val publicationName = name.removePrefix("sign").removeSuffix("Publication")
-    tasks.findByName("linkDebugTest$publicationName")?.let {
-        mustRunAfter(it)
-    }
-    tasks.findByName("compileTestKotlin$publicationName")?.let {
-        mustRunAfter(it)
-    }
+loggerPublishing {
+    description("Minimalistic, fast and configurable Logger for Kotlin Multiplatform")
 }

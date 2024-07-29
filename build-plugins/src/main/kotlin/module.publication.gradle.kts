@@ -79,7 +79,45 @@ if (canSign) {
 }
 
 // fix for: https://github.com/gradle/gradle/issues/26091
-//          https://youtrack.jetbrains.com/issue/KT-46466 is fixed
+// and https://youtrack.jetbrains.com/issue/KT-46466
 tasks.withType<AbstractPublishToMaven>().configureEach {
     dependsOn(project.tasks.withType(Sign::class.java))
+}
+
+open class LoggerPublishingPluginExtension(
+    private val _description: (String) -> Unit,
+) {
+    fun description(value: String) {
+        _description(value)
+    }
+}
+
+project.extensions
+    .create<LoggerPublishingPluginExtension>(
+        "loggerPublishing",
+        ::description,
+    )
+
+private fun description(value: String) {
+    publishing {
+        publications.withType<MavenPublication> {
+            pom {
+                description.set(value)
+            }
+        }
+    }
+    applyDefaultTaskDependencies()
+}
+
+private fun applyDefaultTaskDependencies() {
+    // https://youtrack.jetbrains.com/issue/KT-61313
+    tasks.withType<Sign>().configureEach {
+        val publicationName = name.removePrefix("sign").removeSuffix("Publication")
+        tasks.findByName("linkDebugTest$publicationName")?.let {
+            mustRunAfter(it)
+        }
+        tasks.findByName("compileTestKotlin$publicationName")?.let {
+            mustRunAfter(it)
+        }
+    }
 }
