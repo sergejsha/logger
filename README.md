@@ -54,7 +54,7 @@ init() {
 }
 
 private let TAG = "SampleApp"
-LogKt.d(tag: "\(TAG)Debug") { "debug message" }
+LogKt.d(tag: TAG) { "debug message" }
 ```
 
 ![iOS log](https://raw.githubusercontent.com/sergejsha/logger/master/documentation/examples/iOS.png)
