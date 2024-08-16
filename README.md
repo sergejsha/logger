@@ -119,7 +119,7 @@ class Reader {
     private val tag = classTag<Reader>()
 
     init {
-        d(tag) { "Reader is created" }
+        d(tag) { "created" }
     }
 }
 ```
