@@ -35,7 +35,7 @@ class Reader(private val bufferSize: Int) {
 
     suspend fun readData() {
         try {
-            httpClient.post("read-data")
+            httpClient.get("read-data")
         } catch (e: Exception) {
             w(TAG, e) { "data reading failed" } // warning
             e(TAG, e) // error
@@ -124,7 +124,7 @@ class Reader {
 }
 ```
 
-# Dependencies
+# How to use it in my project?
 
 In `gradle/libs.versions.toml`
 
@@ -156,12 +156,12 @@ kotlin {
 }
 ```
 
-# Publishing
+# Publish to maven Central
 
 1. Bump version in `root.publication.gradle.kts`
 2. `./gradlew clean build publishAllPublicationsToCentralRepository`
 
-## Local maven
+# Publish to local maven
 
 1. Set `X.X-SNAPSHOT` version in `root.publication.gradle.kts`
 2. `./gradlew clean build publishToMavenLocal`
