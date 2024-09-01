@@ -9,7 +9,7 @@ kotlinx-datetime = "0.6.1"
 kotlinx-atomicfu = "0.25.0"
 
 # sample apps
-compose-plugin = "1.7.0-alpha03"
+compose-plugin = "1.7.0-dev1783"
 activity-compose = "1.9.1"
 android-targetSdk = "34"
 
