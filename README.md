@@ -130,8 +130,8 @@ In `gradle/libs.versions.toml`
 
 ```toml
 [versions]
-kotlin = "2.0.0"
-logger = "0.6"
+kotlin = "2.0.20"
+logger = "0.7"
 
 [libraries]
 logger = { module = "de.halfbit:logger", version.ref = "logger" }
