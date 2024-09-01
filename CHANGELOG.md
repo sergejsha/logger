@@ -1,5 +1,9 @@
 # Change log
 
+## 0.7
+
+- Update to Kotlin 2.0.20
+
 ## 0.6
 
 - Added: Control loggable level per class (#20)
