@@ -6,7 +6,7 @@
 Minimalistic and concise Logger for Kotlin Multiplatform from one of my projects,
 shared with the awesome Kotlin community.
 
-![Architecture diagram](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/sergejsha/logger/master/documentation/architecture.v3.iuml)
+![Architecture diagram](https://www.plantuml.com/plantuml/svg/bPFFIWCn48VlUOeX9mljWbSHQL6HIWMnGW_Y8SrErzXaiYIfTQbzTyd-AHjT3zwQRxvCVfbcfpu85tP6CxzLL0ed39H2RaM1or1f18So22eqiZUL8w0fGmK6pHgTRv0FwD26gcmLgPpKo9ZKmdlW-Tdpx6u41-0tkDuL78uSX8TwqJdgvCnfOpib_kwC_SbO2KUAJdtYifCmIcF0JubbK9Pg_zOvwpgxNdIwjaMpOM6B1NwW7aEMPQCeHiHOdH4cBxaD0VFNIQHm0LSi9XlYCSmGhuyTAZ150Tr6I8negMWB1mO0S11h7voGuGX_n6H7njf_2fJrxRxcQdFhstPzIr3khCeJSzQm0LjQOombygDJ53H5iqSVq5XNFIdwrU8zJSMlBNchiJsiddEAxdr_-rvuy-yMA-5DqwO5SFcLPKdqf92cJslfS99Q7F4W_tcXuMgIDIh0ptd_WN3Yq5hrGvaYvV4h_GO0)
 
 # Usage
 
