@@ -10,7 +10,7 @@ kotlinx-atomicfu = "0.25.0"
 
 # sample apps
 compose-plugin = "1.7.0-alpha03"
-activity-compose = "1.9.2"
+activity-compose = "1.9.3"
 android-targetSdk = "34"
 
 [libraries]
