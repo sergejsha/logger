@@ -52,7 +52,7 @@ jobs:
         run: ./gradlew ${{ matrix.task }}Test --stacktrace
 
       - name: Publish ${{ matrix.task }} report
-        uses: mikepenz/action-junit-report@v4
+        uses: mikepenz/action-junit-report@v5
         if: success() || failure()
         with:
           check_name: ${{ matrix.task }}
