@@ -1,5 +1,5 @@
 [![Maven Central](http://img.shields.io/maven-central/v/de.halfbit/logger.svg)](https://central.sonatype.com/artifact/de.halfbit/logger)
-![maintenance-status](https://img.shields.io/badge/maintenance-actively--developed-brightgreen.svg)
+![maintenance-status](https://img.shields.io/badge/maintenance-passively--maintained-yellowgreen.svg)
 
 # 🪵 Logger
 
