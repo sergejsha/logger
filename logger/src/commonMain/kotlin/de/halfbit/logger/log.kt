@@ -55,6 +55,18 @@ public inline fun w(tag: LogTag, err: Throwable, getMessage: () -> String) {
     }
 }
 
+public fun w(tag: String, err: Throwable) {
+    if (currentLogger.loggableLevel.weight <= Warning.weight) {
+        log(Warning, tag, null, err)
+    }
+}
+
+public fun w(tag: LogTag, err: Throwable) {
+    if (tag.loggableLevel.weight <= Warning.weight) {
+        w(tag.name, err)
+    }
+}
+
 public inline fun e(tag: String, getMessage: () -> String) {
     if (currentLogger.loggableLevel.weight <= Error.weight) {
         log(Error, tag, getMessage(), null)
