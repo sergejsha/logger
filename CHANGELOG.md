@@ -1,5 +1,10 @@
 # Change log
 
+## 0.8
+
+- Update to Kotlin 2.1.0
+- Added: w(TAG, Throwable) for logging exceptions as warnings w/o providing a message
+
 ## 0.7
 
 - Update to Kotlin 2.0.20

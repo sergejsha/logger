@@ -15,8 +15,14 @@ import platform.Foundation.NSThread
 public fun autoTag(loggableLevel: LoggableLevel = Everything): LogTag =
     namedTag(name = detectTag(), loggableLevel = loggableLevel)
 
+private const val ENABLE_DEBUG_TRACES = false
+
 private fun detectTag(): String {
     val callstack = NSThread.callStackSymbols
+    if (ENABLE_DEBUG_TRACES) {
+        println("===============================")
+        println(callstack.joinToString("\n"))
+    }
     val element = callstack.getOrNull(3)?.toString() ?: throwAutoTagFailed()
     return element.cleanClassName
 }
@@ -30,6 +36,7 @@ private val String.cleanClassName: String
 
         var cleanClassName =
             substring(0, endIndex)
+                .removeSuffix(".<init>")
                 .removeSuffix(".Companion")
 
         if (cleanClassName.endsWith(".\$init_global")) {
@@ -41,6 +48,10 @@ private val String.cleanClassName: String
             cleanClassName = cleanClassName.substring(startIndex + 1)
         } else {
             cleanClassName = cleanClassName.removePackage()
+        }
+
+        if (ENABLE_DEBUG_TRACES) {
+            println("$cleanClassName <<<< $this")
         }
 
         return cleanClassName
