@@ -1,11 +1,14 @@
 /** Copyright 2024 Halfbit GmbH, Sergej Shafarenka */
 package de.halfbit.logger
 
-import de.halfbit.logger.LogLevel.*
+import de.halfbit.logger.LogLevel.Debug
+import de.halfbit.logger.LogLevel.Error
+import de.halfbit.logger.LogLevel.Info
+import de.halfbit.logger.LogLevel.Warning
 import de.halfbit.logger.sink.LogSink
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public inline fun d(tag: String, getMessage: () -> String) {
     if (currentLogger.loggableLevel.weight <= Debug.weight) {
@@ -154,10 +157,10 @@ private fun initializeCurrentLogger(
 internal annotation class LoggerDsl
 
 @LoggerDsl
-public data class LoggerBuilder
+public class LoggerBuilder
 internal constructor(
-    var sinks: List<LogSink>,
-    var loggableLevel: LoggableLevel,
+    public var sinks: List<LogSink>,
+    public var loggableLevel: LoggableLevel,
     internal var getClockNow: () -> Instant,
     private val removeDefaultSinks: Boolean,
 ) {

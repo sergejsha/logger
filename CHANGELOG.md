@@ -1,5 +1,10 @@
 # Change log
 
+## 0.9
+
+- Update to Kotlin 2.2.0
+- Bump libraries
+
 ## 0.8
 
 - Update to Kotlin 2.1.0

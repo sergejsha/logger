@@ -1,33 +1,20 @@
 [versions]
-agp = "8.7.3"
-kotlin = "2.1.20"
+agp = "8.11.0"
+kotlin = "2.2.0"
 
 android-minSdk = "24"
-android-compileSdk = "34"
+android-compileSdk = "36"
 
-kotlinx-datetime = "0.6.2"
-kotlinx-atomicfu = "0.27.0"
-
-# sample apps
-compose-plugin = "1.7.0-alpha03"
-activity-compose = "1.9.3"
-android-targetSdk = "34"
+kotlinx-datetime = "0.7.1"
+kotlinx-atomicfu = "0.29.0"
 
 [libraries]
 # logger
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
-kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime" }
 kotlinx-atomicfu = { module = "org.jetbrains.kotlinx:atomicfu", version.ref = "kotlinx-atomicfu" }
-
-# sample apps
-androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "activity-compose" }
 
 [plugins]
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-atomicfu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "kotlinx-atomicfu" }
-# logger
-android-application = { id = "com.android.application", version.ref = "agp" }
-jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-plugin" }
-kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }

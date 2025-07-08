@@ -2,9 +2,9 @@
 package de.halfbit.logger
 
 import de.halfbit.logger.sink.LogSink
-import kotlinx.datetime.Instant
 import kotlin.test.Test
 import kotlin.test.assertTrue
+import kotlin.time.Instant
 
 class LoggerTest {
 

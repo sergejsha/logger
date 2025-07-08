@@ -4,7 +4,7 @@ package de.halfbit.logger.sink
 import de.halfbit.logger.LogLevel
 import de.halfbit.logger.LoggerDsl
 import de.halfbit.logger.sink.PrettyLogPrinter.Layout
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun buildLogPrinter(
     block: LogPrinterBuilder.() -> Unit

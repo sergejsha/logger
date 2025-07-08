@@ -7,7 +7,7 @@ import de.halfbit.logger.initializeLogger
 import de.halfbit.logger.sink.memory.MemoryRingSink
 import de.halfbit.logger.sink.memory.registerMemoryRingSink
 import de.halfbit.logger.w
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 
