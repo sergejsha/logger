@@ -7,7 +7,7 @@ import de.halfbit.logger.sink.LogPrinter
 import de.halfbit.logger.sink.LogSink
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.cinterop.ptr
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import platform.darwin.*
 
 public fun LoggerBuilder.registerIosLogSink(

@@ -4,8 +4,8 @@ package de.halfbit.logger
 import de.halfbit.logger.sink.LogPrinter
 import de.halfbit.logger.sink.LogSink
 import de.halfbit.logger.sink.println.PrintlnSink
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 @PublishedApi
 internal var currentLogger: Logger = createInitialLogger()

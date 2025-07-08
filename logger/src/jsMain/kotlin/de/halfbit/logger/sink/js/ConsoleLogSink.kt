@@ -6,7 +6,7 @@ import de.halfbit.logger.LoggerBuilder
 import de.halfbit.logger.sink.LogPrinter
 import de.halfbit.logger.sink.LogSink
 import de.halfbit.logger.sink.buildLogPrinter
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun LoggerBuilder.registerConsoleLogSink(
     logPrinter: LogPrinter = browserLogPrinter
