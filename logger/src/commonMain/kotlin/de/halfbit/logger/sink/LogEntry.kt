@@ -2,7 +2,7 @@
 package de.halfbit.logger.sink
 
 import de.halfbit.logger.LogLevel
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 internal data class LogEntry(
     val level: LogLevel,

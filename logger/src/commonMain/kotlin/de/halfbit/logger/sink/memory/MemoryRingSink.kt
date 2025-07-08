@@ -6,7 +6,7 @@ import de.halfbit.logger.LoggerBuilder
 import de.halfbit.logger.sink.LogEntry
 import de.halfbit.logger.sink.LogPrinter
 import de.halfbit.logger.sink.LogSink
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public interface MemoryRingSink {
     public fun getLogEntries(): List<String>

@@ -2,7 +2,7 @@
 package de.halfbit.logger.sink
 
 import de.halfbit.logger.LogLevel
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun interface LogPrinter {
     public operator fun invoke(

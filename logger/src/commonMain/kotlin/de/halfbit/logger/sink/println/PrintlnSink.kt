@@ -5,7 +5,7 @@ import de.halfbit.logger.LogLevel
 import de.halfbit.logger.LoggerBuilder
 import de.halfbit.logger.sink.LogPrinter
 import de.halfbit.logger.sink.LogSink
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public fun LoggerBuilder.registerPrintlnSink(
     logPrinter: LogPrinter = LogPrinter.Default,

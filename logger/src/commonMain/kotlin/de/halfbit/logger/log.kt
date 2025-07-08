@@ -5,7 +5,7 @@ import de.halfbit.logger.LogLevel.*
 import de.halfbit.logger.sink.LogSink
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 
 public inline fun d(tag: String, getMessage: () -> String) {
     if (currentLogger.loggableLevel.weight <= Debug.weight) {
