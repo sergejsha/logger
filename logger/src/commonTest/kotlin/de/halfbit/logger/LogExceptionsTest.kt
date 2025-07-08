@@ -4,10 +4,10 @@ package de.halfbit.logger
 import de.halfbit.logger.sink.LogPrinter
 import de.halfbit.logger.sink.memory.MemoryRingSink
 import de.halfbit.logger.sink.memory.registerMemoryRingSink
-import kotlin.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
+import kotlin.time.Instant
 
 private const val TAG = "LogExceptionsTest"
 
@@ -34,11 +34,10 @@ class LogExceptionsTest {
         val expectedMessage = "23:40:57.120 .... LogExceptionsTest E Error message"
         assertEquals(expectedMessage, actualMessage)
 
-        val actualException = stackTrace[1]
-        assertTrue("Cannot find exception in: $actualException") {
-            actualException.contains("Exception") ||
-                    actualException.contains("captureStack") // js, wasmJs (firefox)
-
+        assertTrue("Cannot find exception in: $stackTrace") {
+            stackTrace[1].contains("Exception") ||
+                    stackTrace[1].contains("captureStack") ||
+                    stackTrace[2].contains("Exception")
         }
     }
 
@@ -61,11 +60,10 @@ class LogExceptionsTest {
         val expectedMessage = "23:40:57.120 .... LogExceptionsTest W Warning message"
         assertEquals(expectedMessage, actualMessage)
 
-        val actualException = stackTrace[1]
-        assertTrue("Cannot find exception in: $actualException") {
-            actualException.contains("Exception") ||
-                    actualException.contains("captureStack") // js, wasmJs (firefox)
-
+        assertTrue("Cannot find exception in: $stackTrace") {
+            stackTrace[1].contains("Exception") ||
+                    stackTrace[1].contains("captureStack") ||
+                    stackTrace[2].contains("Exception")
         }
     }
 }
