@@ -56,7 +56,9 @@ init() {
 }
 
 private let TAG = "SampleApp"
-LogKt.d(tag: TAG) { "debug message" }
+LogKt.d(tag: TAG) {
+    "debug message"
+}
 ```
 
 ![iOS log](https://raw.githubusercontent.com/sergejsha/logger/master/documentation/examples/iOS.png)
@@ -132,8 +134,8 @@ In `gradle/libs.versions.toml`
 
 ```toml
 [versions]
-kotlin = "2.1.0"
-logger = "0.8"
+kotlin = "2.2.0"
+logger = "0.9"
 
 [libraries]
 logger = { module = "de.halfbit:logger", version.ref = "logger" }
@@ -160,18 +162,13 @@ kotlin {
 
 # Publish to maven Central
 
-1. Bump version in `root.publication.gradle.kts`
-2. `./gradlew clean build publishAllPublicationsToCentralRepository`
-
-# Publish to local maven
-
-1. Set `X.X-SNAPSHOT` version in `root.publication.gradle.kts`
-2. `./gradlew clean build publishToMavenLocal`
+1. Bump version in `build.gradle.kts` of the root project
+2. `./gradlew clean build releaseToMavenCentral`
 
 # License
 
 ```
-Copyright 2024 Sergej Shafarenka, www.halfbit.de
+Copyright 2024-2025 Sergej Shafarenka, www.halfbit.de
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

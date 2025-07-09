@@ -6,14 +6,4 @@ pluginManagement {
     }
 }
 
-dependencyResolutionManagement {
-    @Suppress("UnstableApiUsage")
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
-
 rootProject.name = "logger"
-includeBuild("build-plugins")
-include(":logger")
