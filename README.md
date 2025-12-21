@@ -134,8 +134,8 @@ In `gradle/libs.versions.toml`
 
 ```toml
 [versions]
-kotlin = "2.2.0"
-logger = "0.9"
+kotlin = "2.3.0"
+logger = "0.10"
 
 [libraries]
 logger = { module = "de.halfbit:logger", version.ref = "logger" }
@@ -168,7 +168,7 @@ kotlin {
 # License
 
 ```
-Copyright 2024-2025 Sergej Shafarenka, www.halfbit.de
+Copyright 2024-2026 Sergej Shafarenka, www.halfbit.de
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

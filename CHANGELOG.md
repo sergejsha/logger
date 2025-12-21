@@ -1,5 +1,9 @@
 # Change log
 
+## 0.10
+
+- Update to Kotlin 2.3.0
+
 ## 0.9
 
 - Update to Kotlin 2.2.0
