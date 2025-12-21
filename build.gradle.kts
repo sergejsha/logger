@@ -17,8 +17,8 @@ plugins {
     id("signing")
     id("maven-publish")
 }
-git a
-        group = "de.halfbit"
+
+group = "de.halfbit"
 version = "0.9"
 
 repositories {
