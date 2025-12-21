@@ -23,7 +23,9 @@ jobs:
       matrix:
         include:
           - os: ubuntu-latest
-            task: testDebugUnit # jvm + android
+            task: jvmTest # jvm + android
+          - os: ubuntu-latest
+            task: jvmTest
           - os: macos-latest
             task: iosSimulatorArm64
           - os: ubuntu-latest

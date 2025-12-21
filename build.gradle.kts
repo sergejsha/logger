@@ -36,20 +36,12 @@ kotlin {
         }
     }
 
+    @Suppress("UnstableApiUsage")
     androidLibrary {
-        //publishLibraryVariants("release") // fixme
-
         namespace = "de.halfbit.logger"
         compileSdk = libs.versions.android.compileSdk.get().toInt()
         minSdk = libs.versions.android.minSdk.get().toInt()
 
-        /*
-        testOptions {
-            unitTests {
-                isReturnDefaultValues = true
-            }
-        }
-         */
 
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_1_8)
@@ -65,12 +57,6 @@ kotlin {
             commonWebpackConfig {
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
                     static(project.projectDir.path)
-                    /*
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
-                     */
                 }
             }
             testTask {
@@ -99,7 +85,6 @@ kotlin {
         common {
             group("java") {
                 withJvm()
-                //withAndroid()
                 withAndroidNative()
             }
         }
@@ -120,22 +105,6 @@ kotlin {
         }
     }
 }
-
-/*
-android {
-    namespace = "de.halfbit.logger"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-
-    testOptions {
-        unitTests {
-            isReturnDefaultValues = true
-        }
-    }
-}
- */
 
 val canSignArtifacts = project.hasProperty("signing.keyId")
 if (canSignArtifacts) {
