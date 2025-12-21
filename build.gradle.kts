@@ -100,6 +100,7 @@ kotlin {
         }
         all {
             languageSettings {
+                optIn("kotlin.js.ExperimentalWasmJsInterop")
                 optIn("kotlin.time.ExperimentalTime")
             }
         }
