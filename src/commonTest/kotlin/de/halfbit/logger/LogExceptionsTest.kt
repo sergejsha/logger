@@ -37,7 +37,8 @@ class LogExceptionsTest {
         assertTrue("Cannot find exception in: $stackTrace") {
             stackTrace[1].contains("Exception") ||
                     stackTrace[1].contains("captureStack") ||
-                    stackTrace[2].contains("Exception")
+                    stackTrace[2].contains("Exception") ||
+                    stackTrace[2].contains("createJsError")
         }
     }
 
@@ -60,10 +61,11 @@ class LogExceptionsTest {
         val expectedMessage = "23:40:57.120 .... LogExceptionsTest W Warning message"
         assertEquals(expectedMessage, actualMessage)
 
-        assertTrue("Cannot find exception in: $stackTrace") {
+        assertTrue("Exception must be present, but cannot be found: $stackTrace") {
             stackTrace[1].contains("Exception") ||
                     stackTrace[1].contains("captureStack") ||
-                    stackTrace[2].contains("Exception")
+                    stackTrace[2].contains("Exception") ||
+                    stackTrace[2].contains("createJsError")
         }
     }
 }

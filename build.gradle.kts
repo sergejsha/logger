@@ -1,3 +1,4 @@
+import com.android.build.api.dsl.androidLibrary
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -6,13 +7,14 @@ import java.net.URI
 import java.net.http.HttpClient
 import java.net.http.HttpRequest
 import java.net.http.HttpResponse
-import java.util.Base64
+import java.util.*
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.android.library)
+    alias(libs.plugins.android.kotlin.multiplatform.library)
     alias(libs.plugins.kotlinx.atomicfu)
     alias(libs.plugins.dokka)
+    alias(libs.plugins.dependencyUpdates)
     id("signing")
     id("maven-publish")
 }
@@ -34,8 +36,13 @@ kotlin {
         }
     }
 
-    androidTarget {
-        publishLibraryVariants("release")
+    @Suppress("UnstableApiUsage")
+    androidLibrary {
+        namespace = "de.halfbit.logger"
+        compileSdk = libs.versions.android.compileSdk.get().toInt()
+        minSdk = libs.versions.android.minSdk.get().toInt()
+
+
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_1_8)
         }
@@ -49,10 +56,7 @@ kotlin {
         browser {
             commonWebpackConfig {
                 devServer = (devServer ?: KotlinWebpackConfig.DevServer()).apply {
-                    static = (static ?: mutableListOf()).apply {
-                        // Serve sources to debug inside browser
-                        add(project.projectDir.path)
-                    }
+                    static(project.projectDir.path)
                 }
             }
             testTask {
@@ -96,22 +100,9 @@ kotlin {
         }
         all {
             languageSettings {
+                optIn("kotlin.js.ExperimentalWasmJsInterop")
                 optIn("kotlin.time.ExperimentalTime")
             }
-        }
-    }
-}
-
-android {
-    namespace = "de.halfbit.logger"
-    compileSdk = libs.versions.android.compileSdk.get().toInt()
-    defaultConfig {
-        minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-
-    testOptions {
-        unitTests {
-            isReturnDefaultValues = true
         }
     }
 }
@@ -220,3 +211,18 @@ if (canSignArtifacts) {
 
 private fun Project.getPropertyOrEmpty(name: String): String =
     if (hasProperty(name)) property(name) as String? ?: "" else ""
+
+// -- START: Check version only accepts stable versions
+private val unstableVersionRegex = "[0-9,.v-]+(-r)?(.*)".toRegex()
+private fun isNonStable(version: String): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.uppercase().contains(it) }
+    return !stableKeyword && !unstableVersionRegex.matches(version)
+}
+
+tasks.withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
+    rejectVersionIf {
+        isNonStable(candidate.version) && !isNonStable(currentVersion)
+    }
+    gradleReleaseChannel = "stable"
+}
+// -- END
